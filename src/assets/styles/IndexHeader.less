@@ -1,0 +1,177 @@
+.header-index {
+  width: 1000px;
+}
+
+.headerCurrenList {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 0 15px;
+
+  .headerCurrenIcon {
+    margin-left: 0;
+  }
+
+  span {
+    padding-left: 10px;
+    font-size: 12px;
+    flex: 1;
+  }
+}
+
+.headerCurrenIcon {
+  width: 20px;
+  height: 20px;
+  border-radius: 100%;
+  margin-left: 10px;
+}
+
+.currenList {
+  float: right;
+  margin: 0 10px;
+
+  .el-dropdown-link {
+    display: flex;
+    height: 33px;
+    align-items: center;
+    justify-content: center;
+  }
+
+  span {
+    line-height: 34px;
+    min-width: 32px;
+    display: inline-block;
+    text-align: center;
+  }
+}
+
+.main-header {
+  height: 66px;
+  line-height: 66px;
+  padding: 0 20px;
+
+  span {
+    font-size: 14px;
+    color: #fff;
+    cursor: pointer;
+  }
+
+  a {
+    color: #fff;
+  }
+
+  .iconfont {
+    color: #fff;
+  }
+
+  .login-item {
+    margin: 0 10px;
+  }
+
+  & .logo,
+  & .nav {
+    float: left;
+  }
+
+  & .submenu,
+  & .language,
+  & .login,
+  & .app-download,
+  & .balance-wrap {
+    float: right;
+  }
+
+  .app-download {
+    .login-item {
+      position: relative;
+      background-color: rgba(40, 40, 40, .7);
+      padding: 7px 8px;
+      border-radius: 3px;
+      padding-left: 20px;
+
+      &:before {
+        font-family: 'iconfont';
+        content: '\e69f';
+        font-size: 18px;
+        position: absolute;
+        top: 5px;
+        left: 2px;
+        line-height: 1;
+      }
+    }
+  }
+
+  .logo {
+    margin: 0 20px;
+
+    img {
+      vertical-align: middle;
+    }
+  }
+
+  .nav {
+    font-size: 16px;
+
+    li {
+      margin: 0 20px;
+      display: inline;
+    }
+  }
+
+  .language {
+    margin-left: 10px;
+    height: 100%;
+
+    .iconfont {
+      display: inline-block;
+    }
+
+    .el-dropdown-link:hover {
+      .iconfont {
+        animation: rotateDown .3s;
+        animation-fill-mode: forwards;
+      }
+    }
+  }
+
+  .user-msg {
+    display: inline-block;
+
+    .el-badge__content {
+      border: 0;
+    }
+
+    .iconfont {
+      line-height: 1;
+      font-size: 22px;
+      vertical-align: middle;
+      display: block;
+    }
+  }
+
+  .balance-wrap {
+    margin-right: 10px;
+    height: 100%;
+
+    .iconfont {
+      display: inline-block;
+    }
+
+    .el-dropdown-link:hover {
+      .iconfont {
+        animation: rotateDown .3s;
+        animation-fill-mode: forwards;
+      }
+    }
+  }
+}
+
+.qrcode-box {
+  margin: 0 -10px;
+}
+
+.qrcode-l,
+.qrcode-r {
+  float: left;
+  margin: 0 10px;
+}

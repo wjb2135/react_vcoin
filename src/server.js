@@ -1,8 +1,12 @@
 import axios from "axios";
 import { Component } from "react";
 import { message } from 'antd';
+import qs from "qs";
+import { setCookie, getCookie, deleteCookie } from "./assets/js/cookieHandle";
+// import { hashHistory } from "react-router-dom";
 
-let base = "/api";
+let base = "";
+let needLinkPageLogin = true;
 
 // 请求前拦截
 axios.interceptors.request.use(
@@ -41,12 +45,10 @@ axios.interceptors.response.use(
     // 对响应数据做些事
     if (res.data && res.data.errcode != 0) {
       if (res.data.errcode == 10006) { // 用户未登录或登录状态信息过期
-        store.dispatch('setBaseLoginUserInfo', '')
+        // store.dispatch('setBaseLoginUserInfo', '')
         deleteCookie('_TOKEN')
         if (needLinkPageLogin) {
-          router.push({
-            path: '/login'
-          })
+          // hashHistory.replace("/login");
         }
       } else if (res.data.errcode == 10010 || res.data.errcode == 10013) {
         return Promise.reject(res.data)
@@ -55,7 +57,7 @@ axios.interceptors.response.use(
       }
       return Promise.reject(res.data);
     }
-    return data;
+    return res;
   },
   err => {
     if (err.response.status === 504 || err.response.status === 404) {

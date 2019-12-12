@@ -1,0 +1,656 @@
+[{
+    "value": "CDB",
+    "text": "國家開發銀行"
+  },
+  {
+    "value": "ICBC",
+    "text": "中國工商銀行"
+  },
+  {
+    "value": "ABC",
+    "text": "中國農業銀行"
+  },
+  {
+    "value": "BOC",
+    "text": "中國銀行"
+  },
+  {
+    "value": "CCB",
+    "text": "中國建設銀行"
+  },
+  {
+    "value": "PSBC",
+    "text": "中國郵政儲蓄銀行"
+  },
+  {
+    "value": "COMM",
+    "text": "交通銀行"
+  },
+  {
+    "value": "CMB",
+    "text": "招商銀行"
+  },
+  {
+    "value": "SPDB",
+    "text": "上海浦東發展銀行"
+  },
+  {
+    "value": "CIB",
+    "text": "興業銀行"
+  },
+  {
+    "value": "HXBANK",
+    "text": "華夏銀行"
+  },
+  {
+    "value": "GDB",
+    "text": "廣東發展銀行"
+  },
+  {
+    "value": "CMBC",
+    "text": "中國民生銀行"
+  },
+  {
+    "value": "CITIC",
+    "text": "中信銀行"
+  },
+  {
+    "value": "CEB",
+    "text": "中國光大銀行"
+  },
+  {
+    "value": "EGBANK",
+    "text": "恆豐銀行"
+  },
+  {
+    "value": "CZBANK",
+    "text": "浙商銀行"
+  },
+  {
+    "value": "BOHAIB",
+    "text": "渤海銀行"
+  },
+  {
+    "value": "SPABANK",
+    "text": "平安銀行"
+  },
+  {
+    "value": "SHRCB",
+    "text": "上海農村商業銀行"
+  },
+  {
+    "value": "YXCCB",
+    "text": "玉溪市商業銀行"
+  },
+  {
+    "value": "YDRCB",
+    "text": "堯都農商行"
+  },
+  {
+    "value": "BJBANK",
+    "text": "北京銀行"
+  },
+  {
+    "value": "SHBANK",
+    "text": "上海銀行"
+  },
+  {
+    "value": "JSBANK",
+    "text": "江蘇銀行"
+  },
+  {
+    "value": "HZCB",
+    "text": "杭州銀行"
+  },
+  {
+    "value": "NJCB",
+    "text": "南京銀行"
+  },
+  {
+    "value": "NBBANK",
+    "text": "寧波銀行"
+  },
+  {
+    "value": "HSBANK",
+    "text": "徽商銀行"
+  },
+  {
+    "value": "CSCB",
+    "text": "長沙銀行"
+  },
+  {
+    "value": "CDCB",
+    "text": "成都銀行"
+  },
+  {
+    "value": "CQBANK",
+    "text": "重慶銀行"
+  },
+  {
+    "value": "DLB",
+    "text": "大連銀行"
+  },
+  {
+    "value": "NCB",
+    "text": "南昌銀行"
+  },
+  {
+    "value": "FJHXBC",
+    "text": "福建海峽銀行"
+  },
+  {
+    "value": "HKB",
+    "text": "漢口銀行"
+  },
+  {
+    "value": "WZCB",
+    "text": "溫州銀行"
+  },
+  {
+    "value": "QDCCB",
+    "text": "青島銀行"
+  },
+  {
+    "value": "TZCB",
+    "text": "台州銀行"
+  },
+  {
+    "value": "JXBANK",
+    "text": "嘉興銀行"
+  },
+  {
+    "value": "CSRCB",
+    "text": "常熟農村商業銀行"
+  },
+  {
+    "value": "NHB",
+    "text": "南海農村信用聯社"
+  },
+  {
+    "value": "CZRCB",
+    "text": "常州農村信用聯社"
+  },
+  {
+    "value": "H3CB",
+    "text": "內蒙古銀行"
+  },
+  {
+    "value": "SXCB",
+    "text": "紹興銀行"
+  },
+  {
+    "value": "SDEB",
+    "text": "順德農商銀行"
+  },
+  {
+    "value": "WJRCB",
+    "text": "吳江農商銀行"
+  },
+  {
+    "value": "ZBCB",
+    "text": "齊商銀行"
+  },
+  {
+    "value": "GYCB",
+    "text": "貴陽市商業銀行"
+  },
+  {
+    "value": "ZYCBANK",
+    "text": "遵義市商業銀行"
+  },
+  {
+    "value": "HZCCB",
+    "text": "湖州市商業銀行"
+  },
+  {
+    "value": "DAQINGB",
+    "text": "龍江銀行"
+  },
+  {
+    "value": "JINCHB",
+    "text": "晉城銀行JCBANK"
+  },
+  {
+    "value": "ZJTLCB",
+    "text": "浙江泰隆商業銀行"
+  },
+  {
+    "value": "GDRCC",
+    "text": "廣東省農村信用社聯合社"
+  },
+  {
+    "value": "DRCBCL",
+    "text": "東莞農村商業銀行"
+  },
+  {
+    "value": "MTBANK",
+    "text": "浙江民泰商業銀行"
+  },
+  {
+    "value": "GCB",
+    "text": "廣州銀行"
+  },
+  {
+    "value": "LYCB",
+    "text": "遼陽市商業銀行"
+  },
+  {
+    "value": "JSRCU",
+    "text": "江蘇省農村信用聯合社"
+  },
+  {
+    "value": "LANGFB",
+    "text": "廊坊銀行"
+  },
+  {
+    "value": "CZCB",
+    "text": "浙江稠州商業銀行"
+  },
+  {
+    "value": "DYCB",
+    "text": "德陽商業銀行"
+  },
+  {
+    "value": "JZBANK",
+    "text": "晉中市商業銀行"
+  },
+  {
+    "value": "BOSZ",
+    "text": "蘇州銀行"
+  },
+  {
+    "value": "GLBANK",
+    "text": "桂林銀行"
+  },
+  {
+    "value": "URMQCCB",
+    "text": "烏魯木齊市商業銀行"
+  },
+  {
+    "value": "CDRCB",
+    "text": "成都農商銀行"
+  },
+  {
+    "value": "ZRCBANK",
+    "text": "張家港農村商業銀行"
+  },
+  {
+    "value": "BOD",
+    "text": "東莞銀行"
+  },
+  {
+    "value": "LSBANK",
+    "text": "萊商銀行"
+  },
+  {
+    "value": "BJRCB",
+    "text": "北京農村商業銀行"
+  },
+  {
+    "value": "TRCB",
+    "text": "天津農商銀行"
+  },
+  {
+    "value": "SRBANK",
+    "text": "上饒銀行"
+  },
+  {
+    "value": "FDB",
+    "text": "富滇銀行"
+  },
+  {
+    "value": "CRCBANK",
+    "text": "重慶農村商業銀行"
+  },
+  {
+    "value": "ASCB",
+    "text": "鞍山銀行"
+  },
+  {
+    "value": "NXBANK",
+    "text": "寧夏銀行"
+  },
+  {
+    "value": "BHB",
+    "text": "河北銀行"
+  },
+  {
+    "value": "HRXJB",
+    "text": "華融湘江銀行"
+  },
+  {
+    "value": "ZGCCB",
+    "text": "自貢市商業銀行"
+  },
+  {
+    "value": "YNRCC",
+    "text": "雲南省農村信用社"
+  },
+  {
+    "value": "JLBANK",
+    "text": "吉林銀行"
+  },
+  {
+    "value": "DYCCB",
+    "text": "東營市商業銀行"
+  },
+  {
+    "value": "KLB",
+    "text": "崑崙銀行"
+  },
+  {
+    "value": "ORBANK",
+    "text": "鄂爾多斯銀行"
+  }, {
+    "value": "XTB",
+    "text": "邢台銀行"
+  },
+  {
+    "value": "JSB",
+    "text": "晉商銀行"
+  },
+  {
+    "value": "TCCB",
+    "text": "天津銀行"
+  },
+  {
+    "value": "BOYK",
+    "text": "營口銀行"
+  },
+  {
+    "value": "JLRCU",
+    "text": "吉林農信"
+  },
+  {
+    "value": "SDRCU",
+    "text": "山東農信"
+  },
+  {
+    "value": "XABANK",
+    "text": "西安銀行"
+  },
+  {
+    "value": "HBRCU",
+    "text": "河北省農村信用社"
+  },
+  {
+    "value": "NXRCU",
+    "text": "寧夏黃河農村商業銀行"
+  },
+  {
+    "value": "GZRCU",
+    "text": "貴州省農村信用社"
+  },
+  {
+    "value": "FXCB",
+    "text": "阜新銀行"
+  },
+  {
+    "value": "HBHSBANK",
+    "text": "湖北銀行黃石分行"
+  },
+  {
+    "value": "ZJNX",
+    "text": "浙江省農村信用社聯合社"
+  },
+  {
+    "value": "XXBANK",
+    "text": "新鄉銀行"
+  },
+  {
+    "value": "HBYCBANK",
+    "text": "湖北銀行宜昌分行"
+  },
+  {
+    "value": "LSCCB",
+    "text": "樂山市商業銀行"
+  },
+  {
+    "value": "TCRCB",
+    "text": "江蘇太倉農村商業銀行"
+  },
+  {
+    "value": "BZMD",
+    "text": "駐馬店銀行"
+  },
+  {
+    "value": "GZB",
+    "text": "贛州銀行"
+  },
+  {
+    "value": "WRCB",
+    "text": "無錫農村商業銀行"
+  },
+  {
+    "value": "BGB",
+    "text": "廣西北部灣銀行"
+  },
+  {
+    "value": "GRCB",
+    "text": "廣州農商銀行"
+  },
+  {
+    "value": "JRCB",
+    "text": "江蘇江陰農村商業銀行"
+  },
+  {
+    "value": "BOP",
+    "text": "平頂山銀行"
+  },
+  {
+    "value": "TACCB",
+    "text": "泰安市商業銀行"
+  },
+  {
+    "value": "CGNB",
+    "text": "南充市商業銀行"
+  },
+  {
+    "value": "CCQTGB",
+    "text": "重慶三峽銀行"
+  },
+  {
+    "value": "XLBANK",
+    "text": "中山小欖村鎮銀行"
+  },
+  {
+    "value": "HDBANK",
+    "text": "邯鄲銀行"
+  },
+  {
+    "value": "KORLABANK",
+    "text": "庫爾勒市商業銀行"
+  },
+  {
+    "value": "BOJZ",
+    "text": "錦州銀行"
+  },
+  {
+    "value": "QLBANK",
+    "text": "齊魯銀行"
+  },
+  {
+    "value": "BOQH",
+    "text": "青海銀行"
+  },
+  {
+    "value": "YQCCB",
+    "text": "陽泉銀行"
+  },
+  {
+    "value": "SJBANK",
+    "text": "盛京銀行"
+  },
+  {
+    "value": "FSCB",
+    "text": "撫順銀行"
+  },
+  {
+    "value": "ZZBANK",
+    "text": "鄭州銀行"
+  },
+  {
+    "value": "SRCB",
+    "text": "深圳農村商業銀行"
+  },
+  {
+    "value": "BANKWF",
+    "text": "濰坊銀行"
+  },
+  {
+    "value": "JJBANK",
+    "text": "九江銀行"
+  },
+  {
+    "value": "JXRCU",
+    "text": "江西省農村信用"
+  },
+  {
+    "value": "HNRCU",
+    "text": "河南省農村信用"
+  },
+  {
+    "value": "GSRCU",
+    "text": "甘肅省農村信用"
+  },
+  {
+    "value": "SCRCU",
+    "text": "四川省農村信用"
+  },
+  {
+    "value": "GXRCU",
+    "text": "廣西省農村信用"
+  },
+  {
+    "value": "SXRCCU",
+    "text": "陝西信合"
+  },
+  {
+    "value": "WHRCB",
+    "text": "武漢農村商業銀行"
+  },
+  {
+    "value": "YBCCB",
+    "text": "宜賓市商業銀行"
+  },
+  {
+    "value": "KSRB",
+    "text": "崑山農村商業銀行"
+  },
+  {
+    "value": "SZSBK",
+    "text": "石嘴山銀行"
+  },
+  {
+    "value": "HSBK",
+    "text": "衡水銀行"
+  },
+  {
+    "value": "XYBANK",
+    "text": "信陽銀行"
+  },
+  {
+    "value": "NBYZ",
+    "text": "鄞州銀行"
+  },
+  {
+    "value": "ZJKCCB",
+    "text": "張家口市商業銀行"
+  },
+  {
+    "value": "XCYH",
+    "text": "許昌銀行"
+  },
+  {
+    "value": "JNBANK",
+    "text": "濟寧銀行"
+  },
+  {
+    "value": "CBKF",
+    "text": "開封市商業銀行"
+  },
+  {
+    "value": "WHCCB",
+    "text": "威海市商業銀行"
+  },
+  {
+    "value": "HBC",
+    "text": "湖北銀行"
+  },
+  {
+    "value": "BOCD",
+    "text": "承德銀行"
+  },
+  {
+    "value": "BODD",
+    "text": "丹東銀行"
+  },
+  {
+    "value": "JHBANK",
+    "text": "金華銀行"
+  },
+  {
+    "value": "BOCY",
+    "text": "朝陽銀行"
+  },
+  {
+    "value": "LSBC",
+    "text": "臨商銀行"
+  },
+  {
+    "value": "BSB",
+    "text": "包商銀行"
+  },
+  {
+    "value": "LZYH",
+    "text": "蘭州銀行"
+  },
+  {
+    "value": "BOZK",
+    "text": "周口銀行"
+  },
+  {
+    "value": "DZBANK",
+    "text": "德州銀行"
+  },
+  {
+    "value": "SCCB",
+    "text": "三門峽銀行"
+  },
+  {
+    "value": "AYCB",
+    "text": "安陽銀行"
+  },
+  {
+    "value": "ARCU",
+    "text": "安徽省農村信用社"
+  },
+  {
+    "value": "HURCB",
+    "text": "湖北省農村信用社"
+  },
+  {
+    "value": "HNRCC",
+    "text": "湖南省農村信用社"
+  },
+  {
+    "value": "NYNB",
+    "text": "廣東南粵銀行"
+  },
+  {
+    "value": "LYBANK",
+    "text": "洛陽銀行"
+  },
+  {
+    "value": "NHQS",
+    "text": "農信銀清算中心"
+  },
+  {
+    "value": "CBBQS",
+    "text": "城市商業銀行資金清算中心"
+  },
+  {
+    "value": "FJNX",
+    "text": "福建農村信用社"
+  }
+]

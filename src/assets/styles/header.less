@@ -1,0 +1,170 @@
+@import "./variable.less";
+
+.header-wrapper {
+  max-width: 5120px;
+  width: 100%;
+  & .main-header {
+    background-color: @color-theme;
+  }
+  & .top-header span,
+  & .main-header span {
+    font-size: 14px;
+    color: #fff;
+    cursor: pointer;
+  }
+
+  a {
+    color: #fff;
+  }
+
+  .iconfont {
+    color: #fff;
+  }
+
+  .login-item {
+    margin: 0 10px;
+  }
+
+  & .submenu,
+  & .language,
+  & .login,
+  & .app-download,
+  & .app-setting,
+  & .balance-wrap {
+    float: right;
+  }
+
+  .app-setting {
+    color: #fff;
+    font-size: 18px;
+    margin-left: 15px;
+
+    i {
+      cursor: pointer;
+    }
+  }
+
+  .header-trade {
+    .app-setting {
+      color: #fff;
+    }
+  }
+
+  .language {
+    margin-left: 10px;
+
+    .iconfont {
+      display: inline-block;
+    }
+
+    .el-dropdown-link:hover {
+      .iconfont {
+        animation: rotateDown 0.3s;
+        animation-fill-mode: forwards;
+      }
+    }
+  }
+
+  .user-msg {
+    display: inline-block;
+
+    .el-badge__content {
+      border: 0;
+    }
+
+    .el-badge__content.is-fixed {
+      top: 3px;
+    }
+
+    .iconfont {
+      line-height: 1;
+      font-size: 22px;
+      vertical-align: middle;
+      display: block;
+    }
+  }
+
+  .app-download {
+    .login-item {
+      position: relative;
+      background-color: rgba(40, 40, 40, 0.7);
+      padding: 3px 8px;
+      border-radius: 3px;
+      padding-left: 20px;
+
+      &:before {
+        font-family: "iconfont";
+        content: "\e69f";
+        font-size: 14px;
+        position: absolute;
+        top: 3px;
+        left: 5px;
+        line-height: 1;
+      }
+    }
+  }
+
+  .nav {
+    font-size: 16px;
+
+    li {
+      margin: 0 20px;
+      display: inline;
+    }
+  }
+
+  & .logo,
+  & .nav {
+    float: left;
+  }
+
+  .logo {
+    margin: 0 30px;
+
+    img {
+      vertical-align: middle;
+      max-width: 150px;
+      max-height: 50px;
+    }
+  }
+
+  .el-button.btn-publish-advert {
+    float: right;
+    margin-top: 13px;
+    margin-left: 10px;
+    padding: 0px 32px;
+    border-radius: 2px;
+    height: 40px;
+    line-height: 40px;
+
+    span {
+      font-size: 16px;
+      font-weight: 700;
+      color: #fff;
+    }
+
+    a {
+      color: #fff;
+    }
+  }
+}
+
+@keyframes rotateUp {
+  from {
+    transform: rotateZ(180deg);
+  }
+
+  to {
+    transform: rotateZ(0deg);
+  }
+}
+
+@keyframes rotateDown {
+  from {
+    transform: rotateZ(0deg);
+  }
+
+  to {
+    transform: rotateZ(180deg);
+  }
+}

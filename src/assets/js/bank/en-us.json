@@ -1,0 +1,657 @@
+[{
+    "value": "CDB",
+    "text": "National Development Bank"
+  },
+  {
+    "value": "ICBC",
+    "text": "ICBC"
+  },
+  {
+    "value": "ABC",
+    "text": "China Agricultural Bank"
+  },
+  {
+    "value": "BOC",
+    "text": "Bank of China"
+  },
+  {
+    "value": "CCB",
+    "text": "China Construction Bank"
+  },
+  {
+    "value": "PSBC",
+    "text": "China Postal Savings Bank"
+  },
+  {
+    "value": "COMM",
+    "text": "Bank of Communications"
+  },
+  {
+    "value": "CMB",
+    "text": "China Merchants Bank"
+  },
+  {
+    "value": "SPDB",
+    "text": "Shanghai Pudong Development Bank"
+  },
+  {
+    "value": "CIB",
+    "text": "Industrial Bank"
+  },
+  {
+    "value": "HXBANK",
+    "text": "Huaxia Bank"
+  },
+  {
+    "value": "GDB",
+    "text": "Guangdong Development Bank"
+  },
+  {
+    "value": "CMBC",
+    "text": "China Minsheng Bank"
+  },
+  {
+    "value": "CITIC",
+    "text": "China CITIC Bank"
+  },
+  {
+    "value": "CEB",
+    "text": "China Everbright Bank"
+  },
+  {
+    "value": "EGBANK",
+    "text": "Hengfeng Bank"
+  },
+  {
+    "value": "CZBANK",
+    "text": "Zheshang Bank"
+  },
+  {
+    "value": "BOHAIB",
+    "text": "Bohai Bank"
+  },
+  {
+    "value": "SPABANK",
+    "text": "Ping An Bank"
+  },
+  {
+    "value": "SHRCB",
+    "text": "Shanghai Rural Commercial Bank"
+  },
+  {
+    "value": "YXCCB",
+    "text": "Yuxi City Commercial Bank"
+  },
+  {
+    "value": "YDRCB",
+    "text": "Yandu Agricultural Firm Bank"
+  },
+  {
+    "value": "BJBANK",
+    "text": "Bank of Beijing"
+  },
+  {
+    "value": "SHBANK",
+    "text": "Shanghai Bank"
+  },
+  {
+    "value": "JSBANK",
+    "text": "Jiangsu Bank"
+  },
+  {
+    "value": "HZCB",
+    "text": "Hangzhou Bank"
+  },
+  {
+    "value": "NJCB",
+    "text": "Nanjing Bank"
+  },
+  {
+    "value": "NBBANK",
+    "text": "Ningbo Bank"
+  },
+  {
+    "value": "HSBANK",
+    "text": "Huizhou Merchants Bank"
+  },
+  {
+    "value": "CSCB",
+    "text": "Changsha Bank"
+  },
+  {
+    "value": "CDCB",
+    "text": "Chengdu Bank"
+  },
+  {
+    "value": "CQBANK",
+    "text": "Chongqing Bank"
+  },
+  {
+    "value": "DLB",
+    "text": "Dalian Bank"
+  },
+  {
+    "value": "NCB",
+    "text": "Nanchang Bank"
+  },
+  {
+    "value": "FJHXBC",
+    "text": "Fujian Straits Bank"
+  },
+  {
+    "value": "HKB",
+    "text": "Hankou Bank"
+  },
+  {
+    "value": "WZCB",
+    "text": "Wenzhou Bank"
+  },
+  {
+    "value": "QDCCB",
+    "text": "Qingdao Bank"
+  },
+  {
+    "value": "TZCB",
+    "text": "Taizhou Bank"
+  },
+  {
+    "value": "JXBANK",
+    "text": "Jiaxing Bank"
+  },
+  {
+    "value": "CSRCB",
+    "text": "Changshu Rural Commercial Bank"
+  },
+  {
+    "value": "NHB",
+    "text": "South China Rural Credit Cooperative"
+  },
+  {
+    "value": "CZRCB",
+    "text": "Changzhou Rural Credit Cooperative"
+  },
+  {
+    "value": "H3CB",
+    "text": "Inner Mongolia Bank"
+  },
+  {
+    "value": "SXCB",
+    "text": "Shaoxing Bank"
+  },
+  {
+    "value": "SDEB",
+    "text": "Shunde Rural Commercial Bank"
+  },
+  {
+    "value": "WJRCB",
+    "text": "Wujiang Rural Commercial Bank"
+  },
+  {
+    "value": "ZBCB",
+    "text": "Qi Shang Bank"
+  },
+  {
+    "value": "GYCB",
+    "text": "Guiyang City Commercial Bank"
+  },
+  {
+    "value": "ZYCBANK",
+    "text": "Zunyi City Commercial Bank"
+  },
+  {
+    "value": "HZCCB",
+    "text": "Huzhou City Commercial Bank"
+  },
+  {
+    "value": "DAQINGB",
+    "text": "Longjiang Bank"
+  },
+  {
+    "value": "JINCHB",
+    "text": "Jincheng Bank JCBANK"
+  },
+  {
+    "value": "ZJTLCB",
+    "text": "Zhejiang Tailong Commercial Bank"
+  },
+  {
+    "value": "GDRCC",
+    "text": "Guangdong Provincial Rural Credit Cooperatives Association"
+  },
+  {
+    "value": "DRCBCL",
+    "text": "Dongguan Rural Commercial Bank"
+  },
+  {
+    "value": "MTBANK",
+    "text": "Zhejiang Mintai Commercial Bank"
+  },
+  {
+    "value": "GCB",
+    "text": "Guangzhou Bank"
+  },
+  {
+    "value": "LYCB",
+    "text": "Liaoyang City Commercial Bank"
+  },
+  {
+    "value": "JSRCU",
+    "text": "Jiangsu Rural Credit Union"
+  },
+  {
+    "value": "LANGFB",
+    "text": "Langfang Bank"
+  },
+  {
+    "value": "CZCB",
+    "text": "Zhejiang Chouzhou Commercial Bank"
+  },
+  {
+    "value": "DYCB",
+    "text": "Deyang Commercial Bank"
+  },
+  {
+    "value": "JZBANK",
+    "text": "Jinzhong City Commercial Bank"
+  },
+  {
+    "value": "BOSZ",
+    "text": "Suzhou Bank"
+  },
+  {
+    "value": "GLBANK",
+    "text": "Guilin Bank"
+  },
+  {
+    "value": "URMQCCB",
+    "text": "Urumqi City Commercial Bank"
+  },
+  {
+    "value": "CDRCB",
+    "text": "Chengdu Rural Commercial Bank"
+  },
+  {
+    "value": "ZRCBANK",
+    "text": "Zhangjiagang Rural Commercial Bank"
+  },
+  {
+    "value": "BOD",
+    "text": "Dongguan Bank"
+  },
+  {
+    "value": "LSBANK",
+    "text": "Lai Shang Bank"
+  },
+  {
+    "value": "BJRCB",
+    "text": "Beijing Rural Commercial Bank"
+  },
+  {
+    "value": "TRCB",
+    "text": "Tianjin Rural Commercial Bank"
+  },
+  {
+    "value": "SRBANK",
+    "text": "Shangrao Bank"
+  },
+  {
+    "value": "FDB",
+    "text": "rich bank"
+  },
+  {
+    "value": "CRCBANK",
+    "text": "Chongqing Rural Commercial Bank"
+  },
+  {
+    "value": "ASCB",
+    "text": "Anshan Bank"
+  },
+  {
+    "value": "NXBANK",
+    "text": "Ningxia Bank"
+  },
+  {
+    "value": "BHB",
+    "text": "Hebei Bank"
+  },
+  {
+    "value": "HRXJB",
+    "text": "Hua Rong Xiangjiang Bank"
+  },
+  {
+    "value": "ZGCCB",
+    "text": "Zigong City Commercial Bank"
+  },
+  {
+    "value": "YNRCC",
+    "text": "Yunnan Rural Credit Cooperative"
+  },
+  {
+    "value": "JLBANK",
+    "text": "Jilin Bank"
+  },
+  {
+    "value": "DYCCB",
+    "text": "Dongying City Commercial Bank"
+  },
+  {
+    "value": "KLB",
+    "text": "Kunlun Bank"
+  },
+  {
+    "value": "ORBANK",
+    "text": "Ordos Bank"
+  },
+  {
+    "value": "XTB",
+    "text": "Xingtai Bank"
+  },
+  {
+    "value": "JSB",
+    "text": "Jin Merchant Bank"
+  },
+  {
+    "value": "TCCB",
+    "text": "Tianjin Bank"
+  },
+  {
+    "value": "BOYK",
+    "text": "Yingkou Bank"
+  },
+  {
+    "value": "JLRCU",
+    "text": "Jilin Rural Credit"
+  },
+  {
+    "value": "SDRCU",
+    "text": "Shandong Rural Credit"
+  },
+  {
+    "value": "XABANK",
+    "text": "Xi'an Bank"
+  },
+  {
+    "value": "HBRCU",
+    "text": "Hebei Rural Credit Cooperative"
+  },
+  {
+    "value": "NXRCU",
+    "text": "Ningxia Huanghe Rural Commercial Bank"
+  },
+  {
+    "value": "GZRCU",
+    "text": "Guizhou Rural Credit Cooperative"
+  },
+  {
+    "value": "FXCB",
+    "text": "New Bank"
+  },
+  {
+    "value": "HBHSBANK",
+    "text": "Hubei Bank Huangshi Branch"
+  },
+  {
+    "value": "ZJNX",
+    "text": "Zhejiang Rural Credit Cooperatives Association"
+  },
+  {
+    "value": "XXBANK",
+    "text": "Xinxiang Bank"
+  },
+  {
+    "value": "HBYCBANK",
+    "text": "Hubei Bank Yichang Branch"
+  },
+  {
+    "value": "LSCCB",
+    "text": "Leshan City Commercial Bank"
+  },
+  {
+    "value": "TCRCB",
+    "text": "Jiangsu Taicang Rural Commercial Bank"
+  },
+  {
+    "value": "BZMD",
+    "text": "Zhumadian Bank"
+  },
+  {
+    "value": "GZB",
+    "text": "Ganzhou Bank"
+  },
+  {
+    "value": "WRCB",
+    "text": "Wuxi Rural Commercial Bank"
+  },
+  {
+    "value": "BGB",
+    "text": "Guangxi Beibu Gulf Bank"
+  },
+  {
+    "value": "GRCB",
+    "text": "Guangzhou Rural Commercial Bank"
+  },
+  {
+    "value": "JRCB",
+    "text": "Jiangsu Jiangyin Rural Commercial Bank"
+  },
+  {
+    "value": "BOP",
+    "text": "Pingdingshan Bank"
+  },
+  {
+    "value": "TACCB",
+    "text": "Taian City Commercial Bank"
+  },
+  {
+    "value": "CGNB",
+    "text": "Nan Chong City Commercial Bank"
+  },
+  {
+    "value": "CCQTGB",
+    "text": "Chongqing Three Gorges Bank"
+  },
+  {
+    "value": "XLBANK",
+    "text": "Zhongshan Xiaolan Village Bank"
+  },
+  {
+    "value": "HDBANK",
+    "text": "Handan Bank"
+  },
+  {
+    "value": "KORLABANK",
+    "text": "Korla City Commercial Bank"
+  },
+  {
+    "value": "BOJZ",
+    "text": "Jinzhou Bank"
+  },
+  {
+    "value": "QLBANK",
+    "text": "Qilu Bank"
+  },
+  {
+    "value": "BOQH",
+    "text": "Qinghai Bank"
+  },
+  {
+    "value": "YQCCB",
+    "text": "Yangquan Bank"
+  },
+  {
+    "value": "SJBANK",
+    "text": "Shengjing Bank"
+  },
+  {
+    "value": "FSCB",
+    "text": "Fushun Bank"
+  },
+  {
+    "value": "ZZBANK",
+    "text": "Zhengzhou Bank"
+  },
+  {
+    "value": "SRCB",
+    "text": "Shenzhen Rural Commercial Bank"
+  },
+  {
+    "value": "BANKWF",
+    "text": "Weifang Bank"
+  },
+  {
+    "value": "JJBANK",
+    "text": "Jiujiang Bank"
+  },
+  {
+    "value": "JXRCU",
+    "text": "Rural Credit in Jiangxi Province"
+  },
+  {
+    "value": "HNRCU",
+    "text": "Henan Rural Credit"
+  },
+  {
+    "value": "GSRCU",
+    "text": "Gansu Rural Credit"
+  },
+  {
+    "value": "SCRCU",
+    "text": "Sichuan Rural Credit"
+  },
+  {
+    "value": "GXRCU",
+    "text": "Guangxi Rural Credit"
+  },
+  {
+    "value": "SXRCCU",
+    "text": "Shaanxi Xinhe"
+  },
+  {
+    "value": "WHRCB",
+    "text": "Wuhan Rural Commercial Bank"
+  },
+  {
+    "value": "YBCCB",
+    "text": "Yibin City Commercial Bank"
+  },
+  {
+    "value": "KSRB",
+    "text": "Kunshan Rural Commercial Bank"
+  },
+  {
+    "value": "SZSBK",
+    "text": "Shizuishan Bank"
+  },
+  {
+    "value": "HSBK",
+    "text": "Hengshui Bank"
+  },
+  {
+    "value": "XYBANK",
+    "text": "Xinyang Bank"
+  },
+  {
+    "value": "NBYZ",
+    "text": "Luzhou Bank"
+  },
+  {
+    "value": "ZJKCCB",
+    "text": "Zhangjiakou City Commercial Bank"
+  },
+  {
+    "value": "XCYH",
+    "text": "Xuchang Bank"
+  },
+  {
+    "value": "JNBANK",
+    "text": "Jining Bank"
+  },
+  {
+    "value": "CBKF",
+    "text": "Kaifeng City Commercial Bank"
+  },
+  {
+    "value": "WHCCB",
+    "text": "Weihai City Commercial Bank"
+  },
+  {
+    "value": "HBC",
+    "text": "Hubei Bank"
+  },
+  {
+    "value": "BOCD",
+    "text": "Chengde Bank"
+  },
+  {
+    "value": "BODD",
+    "text": "Dandong Bank"
+  },
+  {
+    "value": "JHBANK",
+    "text": "Jinhua Bank"
+  },
+  {
+    "value": "BOCY",
+    "text": "Chaoyang Bank"
+  },
+  {
+    "value": "LSBC",
+    "text": "Lin Commercial Bank"
+  },
+  {
+    "value": "BSB",
+    "text": "Baohang Bank"
+  },
+  {
+    "value": "LZYH",
+    "text": "Lanzhou Bank"
+  },
+  {
+    "value": "BOZK",
+    "text": "Zhoukou Bank"
+  },
+  {
+    "value": "DZBANK",
+    "text": "Texas Bank"
+  },
+  {
+    "value": "SCCB",
+    "text": "Sanmenxia Bank"
+  },
+  {
+    "value": "AYCB",
+    "text": "Anyang Bank"
+  },
+  {
+    "value": "ARCU",
+    "text": "Anhui Rural Credit Cooperative"
+  },
+  {
+    "value": "HURCB",
+    "text": "Hubei Rural Credit Cooperative"
+  },
+  {
+    "value": "HNRCC",
+    "text": "Hunan Rural Credit Cooperative"
+  },
+  {
+    "value": "NYNB",
+    "text": "Guangdong Nanyue Bank"
+  },
+  {
+    "value": "LYBANK",
+    "text": "Luoyang Bank"
+  },
+  {
+    "value": "NHQS",
+    "text": "Nongxin Silver Clearing Center"
+  },
+  {
+    "value": "CBBQS",
+    "text": "City Commercial Bank Fund Clearing Center"
+  },
+  {
+    "value": "FJNX",
+    "text": "Fujian Rural Credit Cooperative"
+  }
+]
