@@ -13,6 +13,18 @@ export default class Counter extends Component {
           desc: "波西米亚蛋糕: 波西米亚蛋糕蛋糕",
           num: 1,
           price: 18.8
+        },
+        {
+          key: 2,
+          desc: "臻牛潮汕牛肉火锅",
+          num: 3,
+          price: 49
+        },
+        {
+          key: 3,
+          desc: "爱客麦焙",
+          num: 5,
+          price: 80
         }
       ]
     }
@@ -46,6 +58,7 @@ export default class Counter extends Component {
     const trItems = this.state.orderData.map((item, index) => {
       return (
         <tr key={item.key}>
+          <td>{item.key}</td>
           <td>{item.desc}</td>
           <td>{item.price}</td>
           <td>
@@ -75,6 +88,7 @@ export default class Counter extends Component {
           <table className="table">
             <tbody>
               <tr>
+                <th>项目ID</th>
                 <th>项目</th>
                 <th>价格</th>
                 <th>数量</th>
