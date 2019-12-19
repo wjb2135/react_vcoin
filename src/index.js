@@ -1,21 +1,36 @@
 import React from 'react';
 import { Provider } from "react-redux";
 import ReactDOM from 'react-dom';
+import { createStore } from 'redux';
+import { BrowserRouter as Router } from "react-router-dom";
 import "./server.js";
 import './index.css';
-import App from './App';
-import Index from "./pages/index/index";
-import * as serviceWorker from './serviceWorker';
+import reducers from './redux/reducers'
+import Routes from '@configs/router.config'
+import Header from "@components/header";
+import AppFooter from "@components/AppFooter";
+import "./App.css";
+import "@styles/variable.less";
+import "@styles/resetAnt.less";
+import { Layout } from "antd";
+const { Footer, Sider, Content } = Layout;
 
-// let store = createStore(todoApp);
+let store = createStore(reducers);
 
-// ReactDOM.render(<App />, document.getElementById("root"));
 ReactDOM.render(
-  <Index />,
+  <Provider store={store}>
+    <Router>
+      <Layout>
+        <Header />
+        <Content>
+          <Routes />
+        </Content>
+        <Footer>
+          <AppFooter />
+        </Footer>
+      </Layout>
+    </Router>
+  </Provider>,
   document.getElementById("root")
 );
 
-// If you want your app to work offline and load faster, you can change
-// unregister() to register() below. Note this comes with some pitfalls.
-// Learn more about service workers: https://bit.ly/CRA-PWA
-serviceWorker.unregister();
