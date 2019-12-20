@@ -1,6 +1,6 @@
 import React, { Component } from 'react'
 import { Menu, Icon, Switch } from "antd"
-import { BrowserRouter as Router, Link } from "react-router-dom";
+import { BrowserRouter as Router, Link, NavLink } from "react-router-dom";
 
 import "@styles/header.less";
 
@@ -39,7 +39,12 @@ class Header extends Component {
           mode="horizontal"
           className="nav"
         >
-          <Menu.Item key="home">首页</Menu.Item>
+          <Menu.Item key="home">
+            <NavLink
+              to="/"
+              activeClassName="selected"
+            >首页</NavLink>
+          </Menu.Item>
           <Menu.Item key="fabi">法币交易</Menu.Item>
           <Menu.Item key="bibi">币币交易</Menu.Item>
           <Menu.Item key="margin">杠杠交易</Menu.Item>
@@ -47,8 +52,8 @@ class Header extends Component {
           <Menu.Item key="uc">用户中心</Menu.Item>
         </Menu>
         <div className="login">
-          <Link to="/login" className="login-item">登陆</Link>
-          <Link to="/register" className="login-item">注册</Link>
+          <NavLink to="/login" activeClassName="selected" className="login-item">登陆</NavLink>
+          <NavLink to="/register" activeClassName="selected" className="login-item">注册</NavLink>
         </div>
       </div>
     );

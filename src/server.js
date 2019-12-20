@@ -90,14 +90,17 @@ const postRequestParam = (url, params) => {
     method: "post",
     url: `${base}${url}`,
     data: params,
-    transformRequest: [
+    transformRequest: [ // 允许在向服务器发送前，修改请求数据
       function (data) {
-        let ret = "";
-        for (let it in data) {
-          ret +=
-            encodeURIComponent(it) + "=" + encodeURIComponent(data[it]) + "&";
-        }
-        return ret;
+        // let ret = "";
+        // for (let it in data) {
+        //   ret +=
+        //     encodeURIComponent(it) + "=" + encodeURIComponent(data[it]) + "&";
+        // }
+        // return ret;
+        // console.log(data);
+        // let ret = qs.stringify(data)
+        return data
       }
     ],
     headers: {
