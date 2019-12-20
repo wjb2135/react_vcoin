@@ -43,7 +43,7 @@ axios.interceptors.request.use(
 axios.interceptors.response.use(
   res => {
     // 对响应数据做些事
-    if (res.data && res.data.errcode != 0) {
+    if (res.data && res.data.errcode && res.data.errcode != 0) {
       if (res.data.errcode == 10006) { // 用户未登录或登录状态信息过期
         // store.dispatch('setBaseLoginUserInfo', '')
         deleteCookie('_TOKEN')

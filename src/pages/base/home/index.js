@@ -4,6 +4,7 @@ import Banner from "./inc/Banner";
 import MarketTicker from "./inc/MarketTicker";
 import IndexAd from "./inc/IndexAd";
 import { Layout, Menu, Icon } from "antd";
+import store from '../../../store'
 const { Header, Sider, Content } = Layout;
 
 export default class Home extends Component {
@@ -13,6 +14,8 @@ export default class Home extends Component {
     this.state = {
       sysConfig: {}
     };
+    console.log(store.getState());
+    
   }
   async getSysConfig() {
     let res = await this.postRequestParam('/api/system/get_config')

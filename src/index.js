@@ -21,13 +21,13 @@ ReactDOM.render(
   <Provider store={store}>
     <Router>
       <Layout>
-        <Header />
+        {/* <Header /> */}
         <Content>
           <Routes />
         </Content>
-        <Footer>
+        {/* <Footer>
           <AppFooter />
-        </Footer>
+        </Footer> */}
       </Layout>
     </Router>
   </Provider>,
