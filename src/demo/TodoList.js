@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import store from '../store'
-import { changeInputAction, addItemAction, deleteItemAction, getList } from '../store/actionCreators'
+import { getTodoList, changeInputAction, addItemAction, deleteItemAction, getList } from '../store/actionCreators'
 import TodoListUI from './TodoListUI'
  
 class TodoList extends Component {
@@ -50,14 +50,11 @@ class TodoList extends Component {
     this.setState({
       loadingList: true
     })
-    let res = await this.postRequestParam('https://www.easy-mock.com/mock/5dfc958956438735d227ba5f/example/get_lists')
+    const action = getTodoList();
+    store.dispatch(action)
     this.setState({
       loadingList: false
-    })
-    let data = res.data.data.list
-    const action = getList(data);
-    
-    store.dispatch(action)
+    });
   }
 }
  

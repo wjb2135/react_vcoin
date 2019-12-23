@@ -1,7 +1,7 @@
 import React from 'react';
 import { Provider } from "react-redux";
 import ReactDOM from 'react-dom';
-import { createStore } from 'redux';
+import store from "./store";
 import { BrowserRouter as Router } from "react-router-dom";
 import "./server.js";
 import './index.css';
@@ -15,19 +15,19 @@ import "@styles/resetAnt.less";
 import { Layout } from "antd";
 const { Footer, Sider, Content } = Layout;
 
-let store = createStore(reducers);
+// let store = createStore(reducers, window.__REDUX_DEVTOOLS_EXTENSION__ && window.__REDUX_DEVTOOLS_EXTENSION__());
 
 ReactDOM.render(
   <Provider store={store}>
     <Router>
       <Layout>
-        {/* <Header /> */}
+        <Header />
         <Content>
           <Routes />
         </Content>
-        {/* <Footer>
+        <Footer>
           <AppFooter />
-        </Footer> */}
+        </Footer>
       </Layout>
     </Router>
   </Provider>,
