@@ -1,4 +1,10 @@
-import { CHANGE_INPUT, ADD_ITEM, DELETE_ITEM, GET_LIST } from "./actionTypes";
+import {
+  GET_MY_LIST,
+  CHANGE_INPUT,
+  ADD_ITEM,
+  DELETE_ITEM,
+  GET_LIST
+} from "./actionTypes";
 
 import axios from 'axios'
 
@@ -14,7 +20,7 @@ export const deleteItemAction = (index) => ({
   type: DELETE_ITEM,
   index
 })
-export const getList = (data) => ({
+export const getListAction = (data) => ({
   type: GET_LIST,
   data
 })
@@ -25,7 +31,12 @@ export const getTodoList = () => {
       "http://rap2api.taobao.org/app/mock/240569/get_lists"
     );
     const data = res.data.list;
-    const action = getList(data);
+    const action = getListAction(data);
     dispatch(action);
   };
 }
+
+export const getMyListAction = (data) => ({
+  type: GET_MY_LIST,
+  data
+});
