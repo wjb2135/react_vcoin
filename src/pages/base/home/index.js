@@ -1,11 +1,10 @@
 import React, { Component } from "react";
-import { Link } from "react-router-dom";
 import Banner from "./inc/Banner";
 import MarketTicker from "./inc/MarketTicker";
 import IndexAd from "./inc/IndexAd";
-import { Layout, Menu, Icon } from "antd";
+import { Layout } from "antd";
 import store from '../../../store'
-const { Header, Sider, Content } = Layout;
+const { Content } = Layout;
 
 export default class Home extends Component {
   // 初始化页面常量 绑定事件方法
@@ -15,24 +14,25 @@ export default class Home extends Component {
       sysConfig: {}
     };
     console.log(store.getState());
-    
+    this.props.history.push('/home')
   }
   async getSysConfig() {
     let res = await this.postRequestParam('/api/system/get_config')
-    console.log("getSysConfig");
-    console.log(res.data);
     this.setState({
       sysConfig: res.data.data
     });
   }
   componentDidMount() {
+    console.log('componentDidMount');
     this.getSysConfig()
   }
-  render() {
-    const { sysConfig } = this.state
-    console.log('sysConfig');
-    console.log(this.state.sysConfig);
+  componentWillMount() {
+    console.log('componentWillMount');
     
+  }
+  render() {
+    console.log('render');
+    const { sysConfig } = this.state;
     return (
       <div>
         <Banner />

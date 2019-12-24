@@ -15,7 +15,19 @@ class TodoList extends Component {
       loadingList: false
     }
   }
+  shouldComponentUpdate(nextProps, nextState) {
+    console.log('shouldComponentUpdate');
+    return true
+  }
+  componentWillUpdate() {
+    console.log('componentWillUpdate');
+  }
+  componentDidUpdate() {
+    console.log('componentDidUpdate');
+  }
   render() {
+    console.log('render');
+    
     const { inputValue, list, addItem, inputChange, deleteItem } = this.props;
     return (
       <TodoListUI

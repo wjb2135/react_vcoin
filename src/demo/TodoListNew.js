@@ -1,6 +1,6 @@
 import React, { Component } from "react";
 import { connect } from "react-redux";
-import { Input, Button, List } from "antd";
+import { Input } from "antd";
 class TodoListNew extends Component {
   constructor(props) {
     super(props);

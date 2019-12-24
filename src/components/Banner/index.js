@@ -20,7 +20,6 @@ export default class Banner extends Component {
       loading: true
     });
     let res = await this.postRequestParam(APIURL);
-    console.log(res);
     this.setState({
       loading: false,
       list_banner: res.data.data

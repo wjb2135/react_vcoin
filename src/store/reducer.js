@@ -6,7 +6,6 @@ const defaultState = {
 }
 
 export default (state = defaultState, action) => {
-  console.log(state, action);
   if (action.type === CHANGE_INPUT) {
     const newState = JSON.parse(JSON.stringify(state))
     newState.inputValue = action.value

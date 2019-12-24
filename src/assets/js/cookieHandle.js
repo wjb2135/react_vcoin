@@ -7,11 +7,11 @@ function setCookie(name, value) {
     var argv = arguments;
     var argc = arguments.length;
     var expires = (argc > 2) ? argv[2] : null;
-    if (expires != null) {
+    if (expires !== null) {
         var LargeExpDate = new Date();
         LargeExpDate.setTime(LargeExpDate.getTime() + (expires * 1000 * 3600 * 24));
     }
-    document.cookie = name + "=" + escape(value) + ((expires == null) ? "" : ("; expires=" + LargeExpDate.toGMTString()));
+    document.cookie = name + "=" + escape(value) + ((expires === null) ? "" : ("; expires=" + LargeExpDate.toGMTString()));
 }
 
 /**
@@ -22,10 +22,10 @@ function getCookie(Name) {
     var search = Name + "="
     if (document.cookie.length > 0) {
         let offset = document.cookie.indexOf(search)
-        if (offset != -1) {
+        if (offset !== -1) {
             offset += search.length
             let end = document.cookie.indexOf(";", offset)
-            if (end == -1) end = document.cookie.length
+            if (end === -1) end = document.cookie.length
             return unescape(document.cookie.substring(offset, end))
         }
         else return ""

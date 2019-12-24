@@ -1,6 +1,6 @@
 import React, { Component } from "react";
-import { Form, Icon, Input, Button, Checkbox, Modal } from 'antd';
-import { BrowserRouter as Router, Link, NavLink } from "react-router-dom";
+import { Form, Icon, Input, Button } from 'antd';
+import { Link } from "react-router-dom";
 import { getTimestamp, loadScript } from '@/assets/js/common'
 import SecondaryVerification from '@components/SecondaryVerification'
 
@@ -38,6 +38,12 @@ class Login extends Component {
       moveEmailDone: false,
       firstDialogVerifyVisible: false
     }
+  }
+  componentDidMount() {
+    console.log(this.props.match.params.id);
+    this.setState({
+      id: this.props.match.params.id
+    })
   }
   showModal = () => {
     this.setState({
@@ -190,7 +196,7 @@ class Login extends Component {
     return (
       <div className="page-login">
         <div className="register-wrap">
-          <h2>欢迎登陆</h2>
+          <h2>欢迎登陆->{this.state.id}</h2>
           <Form onSubmit={this.handleSubmit} className="login-form">
             <Form.Item>
               {getFieldDecorator('account', {

@@ -1,6 +1,6 @@
 import React, { Component } from 'react'
-import { Menu, Icon, Switch } from "antd"
-import { BrowserRouter as Router, Link, NavLink } from "react-router-dom";
+import { Menu } from "antd"
+import { NavLink } from "react-router-dom";
 
 import "@styles/header.less";
 
@@ -22,7 +22,6 @@ class Header extends Component {
     });
   }
   handleClick = e => {
-    console.log("click ", e);
     this.setState({
       current: e.key
     });

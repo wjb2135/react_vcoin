@@ -6,8 +6,7 @@ export default class IndexAd extends Component {
     super(props)
   }
   render() {
-    const { index_banner_image, index_banner_visible } = this.props.sysConfig;
-    console.log(index_banner_image);
+    const { index_banner_image } = this.props.sysConfig;
     
     return (
       <div className="index-ad">

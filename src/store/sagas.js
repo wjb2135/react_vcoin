@@ -1,4 +1,4 @@
-import { take, takeEvery, put } from "redux-saga/effects";
+import { takeEvery, put } from "redux-saga/effects";
 import { GET_MY_LIST } from "./actionTypes";
 import axios from "axios";
 import { getListAction } from "./actionCreators";

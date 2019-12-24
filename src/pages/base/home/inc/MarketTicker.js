@@ -1,5 +1,5 @@
 import React, { Component } from "react"
-import { Tabs, Input, Table, Divider, Tag } from "antd";
+import { Tabs, Input, Table } from "antd";
 import io from "socket.io-client"
 import "@styles/MarketTicker.less"
 
@@ -101,7 +101,6 @@ export default class MarketTicker extends Component {
   }
   render() {
     const { marketList } = this.state;
-    console.log('marketList');
     const columns = [
       {
         title: "市场",
@@ -135,7 +134,6 @@ export default class MarketTicker extends Component {
         key: "totle"
       }
     ];
-    console.log(marketList);
     return (
       <div className="market-ticker">
         <Search

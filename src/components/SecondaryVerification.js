@@ -1,5 +1,5 @@
 import React, { Component } from 'react'
-import { Tabs, Form, Icon, Input, Button, Modal } from 'antd'
+import { Tabs, Form, Input, Modal } from 'antd'
 const { TabPane } = Tabs
 
 class SecondaryVerification extends Component {
@@ -18,7 +18,7 @@ class SecondaryVerification extends Component {
     });
   }
   render() {
-    const { getFieldDecorator, getFieldsError, getFieldError, isFieldTouched } = this.props.form;
+    const { getFieldDecorator, getFieldError, isFieldTouched } = this.props.form;
     const googleVcodeError = isFieldTouched('google_vcode') && getFieldError('google_vcode');
     return(
       <Modal
