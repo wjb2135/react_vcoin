@@ -18,6 +18,7 @@ const { Footer, Sider, Content } = Layout;
 // let store = createStore(reducers, window.__REDUX_DEVTOOLS_EXTENSION__ && window.__REDUX_DEVTOOLS_EXTENSION__());
 
 ReactDOM.render(
+  // Provider: react-redux 全局state的提供者
   <Provider store={store}>
     <Router>
       <Layout>

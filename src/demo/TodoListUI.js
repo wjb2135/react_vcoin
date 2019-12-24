@@ -4,25 +4,39 @@ import { Input, Button, List } from 'antd';
 
 const TodoListUI = (props) => {
   return (
-    <div style={{ width: 500, margin: '0 auto', padding: '100px 0' }}>
-      <div style={{ display: 'flex' }}>
-        <Input placeholder={props.inputValue} value={props.inputValue} onChange={props.changeInputValue} />
-        <Button type="primary" style={{ marginLeft: '20px' }} onClick={props.clickBtn}>增加</Button>
+    <div style={{ width: 500, margin: "0 auto", padding: "100px 0" }}>
+      <div style={{ display: "flex" }}>
+        <Input
+          placeholder={props.inputValue}
+          value={props.inputValue}
+          onChange={props.inputChange}
+        />
+        <Button
+          type="primary"
+          style={{ marginLeft: "20px" }}
+          onClick={props.addItem}
+        >
+          增加
+        </Button>
       </div>
-      <div style={{ marginTop: '20px' }}>
+      <div style={{ marginTop: "20px" }}>
         <List
           loading={props.loadingList}
           bordered
           dataSource={props.list}
           renderItem={(item, index) => (
-            <List.Item onClick={() => { props.deleteItem(index) }}>
+            <List.Item
+              onClick={() => {
+                props.deleteItem(index);
+              }}
+            >
               {item}
             </List.Item>
           )}
         />
       </div>
     </div>
-  )
+  );
 }
  
 // class TodoListUI extends Component {

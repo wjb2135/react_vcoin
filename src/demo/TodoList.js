@@ -1,61 +1,64 @@
 import React, { Component } from 'react';
-import store from '../store'
 import {
   getMyListAction,
-  changeInputAction,
   addItemAction,
   deleteItemAction,
-  getList
+  changeInputAction
 } from "../store/actionCreators";
 import TodoListUI from './TodoListUI'
- 
+import { connect } from "react-redux";
+
 class TodoList extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      loadingList: false,
-      st: store.getState()
+      loadingList: false
     }
-    this.changeInputValue = this.changeInputValue.bind(this)
-    this.storeChange = this.storeChange.bind(this)
-    this.deleteItem = this.deleteItem.bind(this)
-    this.clickBtn = this.clickBtn.bind(this)
-    store.subscribe(this.storeChange)
   }
-  render() { 
+  render() {
+    const { inputValue, list, addItem, inputChange, deleteItem } = this.props;
     return (
       <TodoListUI
-        inputValue={this.state.st.inputValue}
-        list={this.state.st.list}
-        clickBtn={this.clickBtn}
-        changeInputValue={this.changeInputValue}
-        deleteItem={this.deleteItem}
+        inputValue={inputValue}
+        list={list}
+        addItem={addItem}
+        inputChange={inputChange}
+        deleteItem={deleteItem}
         loadingList={this.state.loadingList}
       />
-     );
+    );
   }
-  changeInputValue(e) {
-    console.log(e.target.value);
-    const action = changeInputAction(e.target.value)
-    store.dispatch(action)
-  }
-  clickBtn() {
-    const action = addItemAction()
-    store.dispatch(action)
-  }
-  deleteItem(index) {
-    const action = deleteItemAction(index)
-    store.dispatch(action)
-  }
-  storeChange() {
-    this.setState({
-      st: store.getState()
-    })
-  }
-  async componentDidMount() {
-    const action = getMyListAction()    
-    store.dispatch(action);
+  componentDidMount() {
+    this.props.getList()
   }
 }
+
+const stateToProp = (state) => {
+  return {
+    inputValue: state.inputValue,
+    list: state.list
+  }
+}
+
+const dispatchToProp = (dispatch) => {
+  return {
+    getList() {
+      const action = getMyListAction();
+      dispatch(action);
+    },
+    inputChange(e) {
+      let action = changeInputAction(e.target.value);
+      dispatch(action);
+    },
+    addItem() {
+      const action = addItemAction();
+      dispatch(action);
+    },
+    deleteItem(index) {
+      let action = deleteItemAction(index);
+      dispatch(action);
+    }
+  };
+}
  
-export default TodoList;
+export default connect(stateToProp, dispatchToProp)(TodoList);  // react-redux 连接器

@@ -1,13 +1,12 @@
 import { CHANGE_INPUT, ADD_ITEM, DELETE_ITEM, GET_LIST, GET_MY_LIST } from './actionTypes'
 
 const defaultState = {
-  inputValue: 'input something',
+  inputValue: 'input somethingssss',
   list: []
 }
 
 export default (state = defaultState, action) => {
   console.log(state, action);
-  
   if (action.type === CHANGE_INPUT) {
     const newState = JSON.parse(JSON.stringify(state))
     newState.inputValue = action.value
@@ -16,9 +15,10 @@ export default (state = defaultState, action) => {
 
   if (action.type === ADD_ITEM) {
     const newState = JSON.parse(JSON.stringify(state))
-    newState.list.push(newState.inputValue)
-    newState.inputValue = ''
-    
+    if (newState.inputValue !== '') {
+      newState.list.push(newState.inputValue)
+      newState.inputValue = ''
+    }
     return newState
   }
   if (action.type === DELETE_ITEM) {
