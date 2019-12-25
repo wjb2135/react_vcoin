@@ -3,7 +3,14 @@ import {
   CHANGE_INPUT,
   ADD_ITEM,
   DELETE_ITEM,
-  GET_LIST
+  GET_LIST,
+  SET_BASE_USERINFO,
+  GET_BASE_USERINFO,
+  SAGA_GET_BASE_USERINFO,
+  SET_MOBILE_VCODE_SENDING,
+  SET_EMAIL_VCODE_SENDING,
+  GET_SYS_CONFIG,
+  SAGA_GET_SYS_CONFIG
 } from "./actionTypes";
 
 import axios from 'axios'
@@ -40,3 +47,33 @@ export const getMyListAction = (data) => ({
   type: GET_MY_LIST,
   data
 });
+
+export const getBaseUserInfoAction = (data) => ({
+  type: GET_BASE_USERINFO,
+  data
+})
+
+export const setMobileVcodeSendingAction = (data) => ({
+  type: SET_MOBILE_VCODE_SENDING,
+  data
+})
+
+export const setEmailVcodeSendingAction = (data) => ({
+  type: SET_EMAIL_VCODE_SENDING,
+  data
+})
+
+export const getSysConfigAction = (data) => ({
+  type: GET_SYS_CONFIG,
+  data
+})
+
+// saga
+export const sagaGetBaseUserInfoAction = (data) => ({
+  type: SAGA_GET_BASE_USERINFO,
+  data
+})
+export const sagaGetSysConfigAction = (data) => ({
+  type: SAGA_GET_SYS_CONFIG,
+  data
+})

@@ -1,9 +1,10 @@
 import axios from "axios";
-import { Component } from "react";
-import { message } from 'antd';
 import qs from "qs";
-import { setCookie, getCookie, deleteCookie } from "./assets/js/cookieHandle";
-// import { hashHistory } from "react-router-dom";
+import { message } from 'antd';
+// import { history } from "react-router-dom";
+import { Component } from "react";
+import store from './store';
+import { getCookie, deleteCookie } from "./assets/js/cookieHandle";
 
 let base = "";
 let needLinkPageLogin = true;
@@ -48,7 +49,7 @@ axios.interceptors.response.use(
         // store.dispatch('setBaseLoginUserInfo', '')
         deleteCookie('_TOKEN')
         if (needLinkPageLogin) {
-          // hashHistory.replace("/login");
+          // history.push('/login')
         }
       } else if (res.data.errcode == 10010 || res.data.errcode == 10013) {
         return Promise.reject(res.data)

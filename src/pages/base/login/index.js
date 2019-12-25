@@ -3,6 +3,13 @@ import { Form, Icon, Input, Button } from 'antd';
 import { Link } from "react-router-dom";
 import { getTimestamp, loadScript } from '@/assets/js/common'
 import SecondaryVerification from '@components/SecondaryVerification'
+import NECaptcha from "@components/validator/NECaptcha"
+import { setCookie } from '@/assets/js/cookieHandle'
+import {
+  getBaseUserInfoAction,
+  sagaGetSysConfigAction
+} from "@/store/actionCreators";
+import { connect } from 'react-redux'
 
 import '@styles/Login.less'
 
@@ -13,7 +20,6 @@ class Login extends Component {
   constructor(props) {
     super(props)
     this.state = {
-      firstDialogVerifyVisible: false,
       isLogining: false,
       visible: false,
       verify_info: {},
@@ -40,10 +46,7 @@ class Login extends Component {
     }
   }
   componentDidMount() {
-    console.log(this.props.match.params.id);
-    this.setState({
-      id: this.props.match.params.id
-    })
+    this.props.getSysConfig()
   }
   showModal = () => {
     this.setState({
@@ -62,7 +65,8 @@ class Login extends Component {
       visible: false,
     });
   }
-  handleSubmit = e => {
+  submitForm = e => {
+    let self = this
     e.preventDefault();
     this.props.form.validateFields((err, values) => {
       if (!err) {
@@ -71,7 +75,12 @@ class Login extends Component {
           isLogining: true
         })
         this.postRequestParam('/api/login', values).then((res) => {
-          
+          if (res.errcode == 0) {
+            setCookie('_TOKEN', res.data._token)
+          }
+        })
+        .then((res) => {
+          this.props.setBaseLoginUserInfo()
         })
         .catch((err) => {
           this.setState({
@@ -93,25 +102,23 @@ class Login extends Component {
             // self.emailVerify = err.data.email
             // self.googleVerify = !!err.data.google_bind
           } else if (err.errcode === 10013) {
-            // // 无需二次认证
-            // self.firstDialogVerifyVisible = true
-            // switch (self.sysConfig.used_wy_verification) {
-            //   case '0':
-            //     // 阿里云滑动验证
-            //     self.$nextTick(() => {
-            //       self.$refs.nc_validator.init()
-            //     })
-            //     break
-            //   case '1':
-            //     // 网易滑动拼图验证
-            //     self.$nextTick(() => {
-            //       self.$refs.ne_validator.init()
-            //     })
-            //     break
+            // 无需二次认证
+            self.setState({
+              firstDialogVerifyVisible: true
+            })
+            switch (self.props.sysConfig.used_wy_verification) {
+              case '0':
+                // 阿里云滑动验证
+                self.child.init()
+                break
+              case '1':
+                // 网易滑动拼图验证
+                self.child.init()
+                break
 
-            //   default:
-            //     break
-            // }
+              default:
+                break
+            }
           } else {
             // self.clearVcode()
           }
@@ -180,7 +187,7 @@ class Login extends Component {
    * 关闭验证器（无需二次验证的）
    */
   closeDialogVerifyVisible(i) {
-    this.firstDialogVerifyVisible = i
+    this.fstate.irstDialogVerifyVisible = i
   }
   setVerifyDialogVisible(i) {
     this.setState({
@@ -191,13 +198,16 @@ class Login extends Component {
     //   this.setEmailVcodeSending(false)
     // }
   }
+  onRef = (ref) => {
+    this.child = ref
+  }
   render() {
     const { getFieldDecorator } = this.props.form;
     return (
       <div className="page-login">
         <div className="register-wrap">
-          <h2>欢迎登陆->{this.state.id}</h2>
-          <Form onSubmit={this.handleSubmit} className="login-form">
+          <h2>欢迎登陆</h2>
+          <Form onSubmit={this.submitForm} className="login-form">
             <Form.Item>
               {getFieldDecorator('account', {
                 rules: [{ required: true, message: '请输入登陆账号' }],
@@ -234,20 +244,40 @@ class Login extends Component {
             <Link to="/register">免费注册</Link>
           </div>
         </div>
-        {
-          this.state.visible && (
-            <SecondaryVerification
-              smsVerify={this.state.smsVerify}
-              emailVerify={this.state.emailVerify}
-              googleVerify={this.state.googleVerify}
-              setFormData={this.setFormData.bind(this)}
-              setVerifyDialogVisible={this.setVerifyDialogVisible.bind(this)}
-            />
-          )
-        }
+        <NECaptcha 
+          dialogVerifyVisible={this.state.firstDialogVerifyVisible}
+          hasCallBack={true}
+          formScene="login"
+          closeDialogVerifyVisible={this.closeDialogVerifyVisible.bind(this)}
+          setFormVerifyInfo={this.setFormVerifyInfo.bind(this)}
+          onRef={this.onRef}
+        />
       </div>
     )
   }
 }
+
+const stateToProps = (state) => {
+  return {
+    sysConfig: state.systemConfig
+  }
+}
+
+const dispatchToProp = (dispatch) => {
+  return {
+    setBaseLoginUserInfo() {
+      const action = getBaseUserInfoAction();
+      dispatch(action);
+    },
+    getSysConfig() {
+      const action = sagaGetSysConfigAction();
+      dispatch(action);
+    }
+  };
+}
+
 const WrappedLoginForm = Form.create({ name: 'normal_login' })(Login);
-export default WrappedLoginForm;
+
+
+
+export default connect(stateToProps, dispatchToProp)(WrappedLoginForm);
