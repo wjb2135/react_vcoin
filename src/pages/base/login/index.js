@@ -6,8 +6,10 @@ import SecondaryVerification from '@components/SecondaryVerification'
 import NECaptcha from "@components/validator/NECaptcha"
 import { setCookie } from '@/assets/js/cookieHandle'
 import {
-  getBaseUserInfoAction,
-  sagaGetSysConfigAction
+  sagaGetBaseUserInfoAction,
+  sagaGetSysConfigAction,
+  setMobileVcodeSendingAction,
+  setEmailVcodeSendingAction
 } from "@/store/actionCreators";
 import { connect } from 'react-redux'
 
@@ -20,6 +22,9 @@ class Login extends Component {
   constructor(props) {
     super(props)
     this.state = {
+      account: '',
+      password: '',
+      verifyType: '',
       isLogining: false,
       visible: false,
       verify_info: {},
@@ -42,8 +47,16 @@ class Login extends Component {
       showVerifyWarn: false,
       moveMobileDone: false,
       moveEmailDone: false,
-      firstDialogVerifyVisible: false
+      firstDialogVerifyVisible: false,
+      formData: {}
     }
+    this.closeDialogVerifyVisible = this.closeDialogVerifyVisible.bind(this)
+    this.submitForm = this.submitForm.bind(this)
+    this.setFormVerifyInfo = this.setFormVerifyInfo.bind(this)
+    this.setVerifyDialogVisible = this.setVerifyDialogVisible.bind(this)
+    this.setFormData = this.setFormData.bind(this)
+    this.setActiveName = this.setActiveName.bind(this)
+    this.handleSubmit = this.handleSubmit.bind(this)
   }
   componentDidMount() {
     this.props.getSysConfig()
@@ -65,12 +78,11 @@ class Login extends Component {
       visible: false,
     });
   }
-  submitForm = e => {
+  handleSubmit(e) {
     let self = this
     e.preventDefault();
     this.props.form.validateFields((err, values) => {
       if (!err) {
-        console.log('Received values of form: ', values);
         this.setState({
           isLogining: true
         })
@@ -79,54 +91,114 @@ class Login extends Component {
             setCookie('_TOKEN', res.data._token)
           }
         })
-        .then((res) => {
-          this.props.setBaseLoginUserInfo()
-        })
-        .catch((err) => {
-          this.setState({
-            isLogining: false
+          .then((res) => {
+            this.props.setBaseLoginUserInfo()
           })
-          console.log(err)
-          // if (self.sysConfig.used_wy_verification === '1') {
-          //   captchaIns && captchaIns.refresh() // 重新初始化滑动拼图验证
-          //   captchaInsPop && captchaInsPop.refresh() // 重新初始化滑动拼图验证
-          // } else {
-          //   captchaIns && captchaIns.reload() // 重新初始化滑动验证
-          //   captchaInsPop && captchaInsPop.reload() // 重新初始化滑动验证
-          // }
-          if (err.errcode == 10010) {
-            // 表示需要短信、邮件或谷歌验证
-            this.showModal()
-            // self.verifyDialogVisible = true
-            // self.smsVerify = err.data.mobile
-            // self.emailVerify = err.data.email
-            // self.googleVerify = !!err.data.google_bind
-          } else if (err.errcode === 10013) {
-            // 无需二次认证
-            self.setState({
-              firstDialogVerifyVisible: true
+          .catch((err) => {
+            this.setState({
+              isLogining: false
             })
-            switch (self.props.sysConfig.used_wy_verification) {
-              case '0':
-                // 阿里云滑动验证
-                self.child.init()
-                break
-              case '1':
-                // 网易滑动拼图验证
-                self.child.init()
-                break
+            if (err.errcode == 10010) {
+              // 表示需要短信、邮件或谷歌验证
+              this.setState({
+                verifyDialogVisible: true,
+                smsVerify: err.data.mobile,
+                emailVerify: err.data.email,
+                googleVerify: !!err.data.google_bind
+              })
+            } else if (err.errcode === 10013) {
+              // 无需二次认证
+              self.setState({
+                firstDialogVerifyVisible: true
+              })
+              switch (self.props.sysConfig.used_wy_verification) {
+                case '0':
+                  // 阿里云滑动验证
+                  self.child.init()
+                  break
+                case '1':
+                  // 网易滑动拼图验证
+                  self.child.init()
+                  break
 
-              default:
-                break
+                default:
+                  break
+              }
+            } else {
+              // self.clearVcode()
             }
-          } else {
-            // self.clearVcode()
-          }
-        })
+          })
       }
       else {
       }
     });
+  }
+  submitForm(e) {
+    let self = this
+    console.log(this.props.form);
+    const { formData } = this.state
+    
+    this.props.form.validateFields((err, values) => {
+      if (!err) {
+        for (const key in formData) {
+          if (formData.hasOwnProperty(key)) {
+            values[key] = formData[key]
+          }
+        }
+        this.setState({
+          isLogining: true
+        })
+        this.postRequestParam('/api/login', values).then((res) => {
+          this.setState({
+            isLogining: false
+          })
+          console.log(res);
+          
+          if (res.errcode == 0) {
+            setCookie('_TOKEN', res.data._token)
+          }
+        })
+          .then((res) => {
+            this.props.getBaseLoginUserInfo()
+            this.props.history.push('/');
+          })
+          .catch((err) => {
+            this.setState({
+              isLogining: false,
+              formData: {}
+            })
+            if (err.errcode == 10010) {
+              // 表示需要短信、邮件或谷歌验证
+              this.setState({
+                verifyDialogVisible: true,
+                smsVerify: err.data.mobile,
+                emailVerify: err.data.email,
+                googleVerify: !!err.data.google_bind
+              })
+            } else if (err.errcode === 10013) {
+              // 无需二次认证
+              self.setState({
+                firstDialogVerifyVisible: true
+              })
+              switch (self.props.sysConfig.used_wy_verification) {
+                case '0':
+                  // 阿里云滑动验证
+                  self.child.init()
+                  break
+                case '1':
+                  // 网易滑动拼图验证
+                  self.child.init()
+                  break
+
+                default:
+                  break
+              }
+            } else {
+              // self.clearVcode()
+            }
+          })
+      }
+    })
   }
   /**
    * 网易滑动拼图验证初始化
@@ -177,29 +249,61 @@ class Login extends Component {
    * @param {Object} i 验证信息
    */
   setFormVerifyInfo(i) {
+    let { formData } = this.state
+    formData.verify_info = i
     this.setState({
-      verify_info: i,
-      firstDialogVerifyVisible: false
+      formData
     })
-    this.handleSubmit()
+    this.submitForm()
   }
   /**
    * 关闭验证器（无需二次验证的）
    */
   closeDialogVerifyVisible(i) {
-    this.fstate.irstDialogVerifyVisible = i
+    this.setState({
+      firstDialogVerifyVisible: false
+    })
   }
   setVerifyDialogVisible(i) {
+    const { setMobileVcodeSending, setEmailVcodeSending } = this.props
     this.setState({
       verifyDialogVisible: i
     })
-    // if (!i) {
-    //   this.setMobileVcodeSending(false)
-    //   this.setEmailVcodeSending(false)
-    // }
+    if (!i) {
+      setMobileVcodeSending(false)
+      setEmailVcodeSending(false)
+    }
   }
   onRef = (ref) => {
+    console.log('ref');
+    console.log(ref);
     this.child = ref
+  }
+  /**
+   * 二次验证 设置验证码到form表单中
+   */
+  setFormData(o) {
+    const { setMobileVcodeSending, setEmailVcodeSending } = this.props
+    let { formData } = this.state
+    for (const key in o) {
+      if (o.hasOwnProperty(key)) {
+        formData[key] = o[key]
+      }
+      this.setState({
+        formData
+      })
+    }
+    this.setState({
+      verifyDialogVisible: false,
+    })
+    setMobileVcodeSending(false)
+    setEmailVcodeSending(false)
+    this.submitForm()
+  }
+  setActiveName(i) {
+    this.setState({
+      activeName: i
+    })
   }
   render() {
     const { getFieldDecorator } = this.props.form;
@@ -207,7 +311,7 @@ class Login extends Component {
       <div className="page-login">
         <div className="register-wrap">
           <h2>欢迎登陆</h2>
-          <Form onSubmit={this.submitForm} className="login-form">
+          <Form className="login-form" onSubmit={this.handleSubmit}>
             <Form.Item>
               {getFieldDecorator('account', {
                 rules: [{ required: true, message: '请输入登陆账号' }],
@@ -230,10 +334,6 @@ class Login extends Component {
               )}
             </Form.Item>
             <Form.Item>
-              {/* {getFieldDecorator('remember', {
-                valuePropName: 'checked',
-                initialValue: true,
-              })(<Checkbox>记住密码</Checkbox>)} */}
               <a className="login-form-forgot" href="">忘记密码？</a>
               <Button type="primary" loading={this.state.isLogining} htmlType="submit" className="login-form-button">登陆</Button>
             </Form.Item>
@@ -244,14 +344,33 @@ class Login extends Component {
             <Link to="/register">免费注册</Link>
           </div>
         </div>
-        <NECaptcha 
-          dialogVerifyVisible={this.state.firstDialogVerifyVisible}
-          hasCallBack={true}
-          formScene="login"
-          closeDialogVerifyVisible={this.closeDialogVerifyVisible.bind(this)}
-          setFormVerifyInfo={this.setFormVerifyInfo.bind(this)}
-          onRef={this.onRef}
-        />
+        {
+          // 网易拼图验证器
+          this.props.sysConfig.used_wy_verification == '1' && (
+            <NECaptcha 
+              dialogVerifyVisible={this.state.firstDialogVerifyVisible}
+              hasCallBack={true}
+              formScene="login"
+              closeDialogVerifyVisible={this.closeDialogVerifyVisible}
+              setFormVerifyInfo={this.setFormVerifyInfo}
+              onRef={this.onRef}
+            />
+          )
+        }
+        {/* 二次验证 */}
+        {
+          this.state.verifyDialogVisible && (
+            <SecondaryVerification
+              smsVerify={this.state.smsVerify}
+              emailVerify={this.state.emailVerify}
+              googleVerify={this.state.googleVerify}
+              verifyDialogVisible={this.state.verifyDialogVisible}
+              setFormData={this.setFormData}
+              setVerifyDialogVisible={this.setVerifyDialogVisible}
+              setActiveName={this.setActiveName}
+            />
+          )
+        }
       </div>
     )
   }
@@ -265,12 +384,20 @@ const stateToProps = (state) => {
 
 const dispatchToProp = (dispatch) => {
   return {
-    setBaseLoginUserInfo() {
-      const action = getBaseUserInfoAction();
+    getBaseLoginUserInfo() {
+      const action = sagaGetBaseUserInfoAction();
       dispatch(action);
     },
     getSysConfig() {
       const action = sagaGetSysConfigAction();
+      dispatch(action);
+    },
+    setMobileVcodeSending(data) {
+      const action = setMobileVcodeSendingAction(data);
+      dispatch(action);
+    },
+    setEmailVcodeSending(data) {
+      const action = setEmailVcodeSendingAction(data);
       dispatch(action);
     }
   };

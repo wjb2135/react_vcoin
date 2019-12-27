@@ -58,7 +58,7 @@ axios.interceptors.response.use(
       }
       return Promise.reject(res.data);
     }
-    return res;
+    return res.data;
   },
   err => {
     if (err.response.status === 504 || err.response.status === 404) {

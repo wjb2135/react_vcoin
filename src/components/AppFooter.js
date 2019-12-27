@@ -12,13 +12,13 @@ export default class AppFooter extends Component {
   async getSysConfig() {
     let res = await this.postRequestParam('/api/system/get_config')
     this.setState({
-      sysConfig: res.data.data
+      sysConfig: res.data
     });
   }
   async getBottomArticles () {
     let res = await this.postRequestParam('/api/system/get_bottom_articles')
     this.setState({
-      bottomArticles: res.data.data
+      bottomArticles: res.data
     });
   }
   componentDidMount() {

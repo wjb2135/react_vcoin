@@ -23,13 +23,13 @@ function* getBaseLoginUserInfo() {
   const res = yield axios.post("/api/get_login_user_info", {
     '_token': getCookie('_TOKEN')
   })
-  const action = getBaseUserInfoAction(res.data.data);
+  const action = getBaseUserInfoAction(res.data);
   yield put(action)
 }
 
 function* getSysConfig() {
   const res = yield axios.post("/api/system/get_config")
-  const action = getSysConfigAction(res.data.data)
+  const action = getSysConfigAction(res.data)
   yield put(action)
 }
 

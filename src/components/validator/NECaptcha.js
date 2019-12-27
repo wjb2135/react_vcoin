@@ -19,6 +19,8 @@ class NECaptcha extends Component {
       loadingEmailVcodeSend: false,
       visible: true
     }
+    this.onClose = this.onClose.bind(this)
+    this.doneMove = this.doneMove.bind(this)
   }
   componentDidMount() {
     this.props.onRef(this)
@@ -37,7 +39,6 @@ class NECaptcha extends Component {
         captchaId: '8a0220bbde4b46c5a52a87813dce01a8',
         element: '#move-c',
         mode: 'embed',
-        width: '520px',
         onReady: function (instance) {
           // 验证码一切准备就绪，此时可正常使用验证码的相关功能
         },
@@ -62,6 +63,7 @@ class NECaptcha extends Component {
           self.setState({
             verifyInfo: data.validate
           })
+          self.doneMove()
         }
       }, function onload(instance) {
         captchaIns = instance
@@ -86,6 +88,8 @@ class NECaptcha extends Component {
           showWarn: false
         })
         this.props.closeDialogVerifyVisible(false)
+        console.log(this.state.verifyInfo);
+        
         this.props.setFormVerifyInfo(this.state.verifyInfo)
       }
     } else {
@@ -223,12 +227,12 @@ class NECaptcha extends Component {
   render() {
     return (
       <div>
-        <span>123</span>
         <Modal
           title="验证"
           visible={this.props.dialogVerifyVisible}
-          onOk={this.handleOk}
-          onCancel={this.handleCancel}
+          width={300}
+          footer={null}
+          onCancel={this.onClose}
         >
           <div className="nc-container nc-container-custom" id="move-c"></div>
         </Modal>

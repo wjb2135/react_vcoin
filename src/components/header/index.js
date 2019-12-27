@@ -1,6 +1,8 @@
 import React, { Component } from 'react'
+import { connect } from "react-redux";
 import { Menu } from "antd"
 import { NavLink } from "react-router-dom";
+import { sagaGetSysConfigAction } from "@/store/actionCreators"
 
 import "@styles/header.less";
 
@@ -8,18 +10,11 @@ class Header extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      current: "home",
-      sysConfig: ""
+      current: "home"
     };
   }
   componentDidMount() {
-    this.getData();
-  }
-  async getData() {
-    let res = await this.postRequestParam("/api/system/get_config");
-    this.setState({
-      sysConfig: res.data.data
-    });
+    this.props.getSysConfig();
   }
   handleClick = e => {
     this.setState({
@@ -30,7 +25,7 @@ class Header extends Component {
     return (
       <div className="app-header">
         <div className="logo">
-          <img src={this.state.sysConfig.site_logo} alt="" />
+          <img src={this.props.sysConfig.site_logo} alt="" />
         </div>
         <Menu
           onClick={this.handleClick}
@@ -59,4 +54,18 @@ class Header extends Component {
   }
 }
 
-export default Header
+const stateToProps = (state) => {
+  return {
+    sysConfig: state.systemConfig
+  }
+}
+const dispatchToProp = (dispatch) => {
+  return {
+    getSysConfig() {
+      const action = sagaGetSysConfigAction()
+      dispatch(action)
+    }
+  }
+}
+
+export default connect(stateToProps, dispatchToProp)(Header)
