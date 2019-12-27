@@ -1,19 +1,13 @@
 import React, { Component } from "react"
+import { connect } from "react-redux";
 import '@styles/AppFooter.less'
 
-export default class AppFooter extends Component {
+class AppFooter extends Component {
   constructor(props) {
     super(props)
     this.state = {
-      sysConfig: {},
       bottomArticles: []
     }
-  }
-  async getSysConfig() {
-    let res = await this.postRequestParam('/api/system/get_config')
-    this.setState({
-      sysConfig: res.data
-    });
   }
   async getBottomArticles () {
     let res = await this.postRequestParam('/api/system/get_bottom_articles')
@@ -22,11 +16,11 @@ export default class AppFooter extends Component {
     });
   }
   componentDidMount() {
-    this.getSysConfig()
     this.getBottomArticles()
   }
   render() {
-    const { sysConfig , bottomArticles } = this.state
+    const { bottomArticles } = this.state
+    const { sysConfig } = this.props
     const bottomArticlesItem = bottomArticles.map((item, index) => (
       <li className="list" key={index}>
         <span className="title">{item.classify}</span>
@@ -102,3 +96,11 @@ export default class AppFooter extends Component {
     )
   }
 }
+
+const stateToProps = (state) => {
+  return {
+    sysConfig: state.systemConfig
+  }
+}
+
+export default connect(stateToProps, null)(AppFooter)

@@ -9,31 +9,16 @@ const { Content } = Layout;
 
 class Home extends Component {
   // 初始化页面常量 绑定事件方法
-  constructor(props, context) {
+  constructor(props) {
     super(props);
-    this.state = {
-      sysConfig: {}
-    };
-    console.log(store.getState());
-    this.props.history.push('/home')
-  }
-  async getSysConfig() {
-    let res = await this.postRequestParam('/api/system/get_config')
-    this.setState({
-      sysConfig: res.data.data
-    });
   }
   componentDidMount() {
     console.log('componentDidMount');
-    this.getSysConfig()
   }
   componentWillMount() {
     console.log('componentWillMount');
-    
   }
   render() {
-    console.log('render');
-    const { sysConfig } = this.state;
     return (
       <div>
         <Banner />

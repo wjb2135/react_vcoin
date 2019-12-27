@@ -1,48 +1,68 @@
 import React, { Component } from 'react';
-import logo from './logo.svg';
-import './App.css';
-import "./assets/styles/variable.less";
 import {
   BrowserRouter as Router,
   Route,
   Switch,
   Redirect
 } from 'react-router-dom';
-import Header from "./components/header";
-import Routers from "./router/routerMap";
-import NotFound from "./components/notFound";
 import { connect } from "react-redux";
+import { sagaGetSysConfigAction } from '@/store/actionCreators';
+import { getCookie } from '@/assets/js/cookieHandle'
+import { Layout } from "antd";
+
+import Routers from "@configs/routerMap";
+import AppHeader from "@components/header";
+import AppFooter from "@components/AppFooter";
+import NotFound from "./components/notFound";
+
+import "./App.css";
+import "@styles/variable.less";
+import "@styles/resetAnt.less";
+
+const { Footer, Content } = Layout;
 
 class App extends Component {
   constructor(props) {
     super(props);
-    this.state = {};
+  }
+  componentDidMount() {
+    this.props.getSysConfig()
   }
   render() {
-    let token = this.props.token;
+    let token = getCookie('_TOKEN')
     return (
       <Router>
-        <div className="App">
-          <Header />
-          <Switch>
-            {Routers.map((item, index) => {
-              return <Route key={index} path={item.path} exact render={props =>
-                (!item.auth ? (<item.component {...props} />) : (token ? <item.component {...props} /> : <Redirect to={{
-                  pathname: '/login',
-                  state: { from: props.location }
-                }} />)
-              )} />
-            })}
-            <Route component={NotFound} />
-          </Switch>
-        </div>
+        <Layout>
+          <AppHeader />
+          <Content>
+            <Switch>
+              {Routers.map((item, index) => {
+                return <Route key={index} path={item.path} exact render={props =>
+                  (!item.auth ? (<item.component {...props} />) : (token ? <item.component {...props} /> : <Redirect to={{
+                    pathname: '/login',
+                    state: { from: props.location }
+                  }} />)
+                  )} />
+              })}
+              <Route component={NotFound} />
+            </Switch>
+          </Content>
+          <Footer>
+            <AppFooter />
+          </Footer>
+        </Layout>
       </Router>
     )
   }
 }
 
-const mapStateToProps = (state, ownProps) => {
-  return { token: state.token };
+const dispatchToProps = (dispatch) => {
+  return {
+    getSysConfig() {
+      const action = sagaGetSysConfigAction()
+      dispatch(action)
+    }
+  }
 }
 
-export default connect(mapStateToProps)(App);
+export default connect(null, dispatchToProps)(App);

@@ -20,6 +20,7 @@ function* getList() {
 }
 
 function* getBaseLoginUserInfo() {
+  if (!getCookie('_TOKEN')) return
   const res = yield axios.post("/api/get_login_user_info", {
     '_token': getCookie('_TOKEN')
   })

@@ -2,7 +2,10 @@ import React, { Component } from 'react'
 import { connect } from "react-redux";
 import { Menu } from "antd"
 import { NavLink } from "react-router-dom";
-import { sagaGetSysConfigAction } from "@/store/actionCreators"
+import { 
+  sagaGetSysConfigAction,
+  sagaGetBaseUserInfoAction
+} from "@/store/actionCreators"
 
 import "@styles/header.less";
 
@@ -14,7 +17,7 @@ class Header extends Component {
     };
   }
   componentDidMount() {
-    this.props.getSysConfig();
+    this.props.getBaseUserInfo()
   }
   handleClick = e => {
     this.setState({
@@ -22,6 +25,7 @@ class Header extends Component {
     });
   };
   render() {
+    const { loginUser } = this.props
     return (
       <div className="app-header">
         <div className="logo">
@@ -46,8 +50,19 @@ class Header extends Component {
           <Menu.Item key="uc">用户中心</Menu.Item>
         </Menu>
         <div className="login">
-          <NavLink to="/login" activeClassName="selected" className="login-item">登陆</NavLink>
-          <NavLink to="/register" activeClassName="selected" className="login-item">注册</NavLink>
+          {
+            loginUser.id ? 
+            (
+              <span>{loginUser.nickname || loginUser.mobile || loginUser.email || loginUser.username}</span>
+            )
+            :
+            (
+              <>
+                <NavLink to="/login" activeClassName="selected" className="login-item">登陆</NavLink>
+                <NavLink to="/register" activeClassName="selected" className="login-item">注册</NavLink>
+              </>
+            )
+          }
         </div>
       </div>
     );
@@ -56,13 +71,14 @@ class Header extends Component {
 
 const stateToProps = (state) => {
   return {
-    sysConfig: state.systemConfig
+    sysConfig: state.systemConfig,
+    loginUser: state.baseUserInfo
   }
 }
 const dispatchToProp = (dispatch) => {
   return {
-    getSysConfig() {
-      const action = sagaGetSysConfigAction()
+    getBaseUserInfo() {
+      const action = sagaGetBaseUserInfoAction()
       dispatch(action)
     }
   }
