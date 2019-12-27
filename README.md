@@ -1,6 +1,6 @@
-## Available Scripts
+## 基于React开发的交易所项目
 
-In the project directory, you can run:
+在项目目录中，可以运行：
 
 ### `yarn start`
 
