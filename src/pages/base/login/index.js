@@ -92,7 +92,7 @@ class Login extends Component {
           }
         })
           .then((res) => {
-            this.props.setBaseLoginUserInfo()
+            this.props.getBaseLoginUserInfo()
           })
           .catch((err) => {
             this.setState({
