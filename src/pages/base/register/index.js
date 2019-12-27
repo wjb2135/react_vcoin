@@ -1,6 +1,7 @@
 import React, { Component } from 'react'
 import { Tabs } from "antd";
 import MobileRegister from "./inc/MobileRegister";
+import EmailRegister from "./inc/EmailRegister";
 import "@styles/Register.less";
 const { TabPane } = Tabs;
 
@@ -30,7 +31,7 @@ export default class register extends Component {
               <MobileRegister options={this.state.options} />
             </TabPane>
             <TabPane tab="邮箱注册" key="email">
-              Content of Tab Pane 2
+              <EmailRegister />
             </TabPane>
           </Tabs>
         </div>
