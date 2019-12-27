@@ -10,7 +10,9 @@ import {
   SET_MOBILE_VCODE_SENDING,
   SET_EMAIL_VCODE_SENDING,
   GET_SYS_CONFIG,
-  SAGA_GET_SYS_CONFIG
+  LOGIN_OUT,
+  SAGA_GET_SYS_CONFIG,
+  SAGA_LOGIN_OUT
 } from "./actionTypes";
 
 import axios from 'axios'
@@ -67,6 +69,10 @@ export const getSysConfigAction = (data) => ({
   type: GET_SYS_CONFIG,
   data
 })
+export const loginOutAction = (data) => ({
+  type: LOGIN_OUT,
+  data
+})
 
 // saga
 export const sagaGetBaseUserInfoAction = (data) => ({
@@ -76,4 +82,7 @@ export const sagaGetBaseUserInfoAction = (data) => ({
 export const sagaGetSysConfigAction = (data) => ({
   type: SAGA_GET_SYS_CONFIG,
   data
+})
+export const sagaLoginOutAction = () => ({
+  type: SAGA_LOGIN_OUT
 })

@@ -5,6 +5,11 @@
   height: 66px;
   line-height: 66px;
   padding: 0 20px;
+  span {
+    color: #fff;
+    font-size: 14px;
+    cursor: pointer;
+  }
   & .logo,
   & .nav {
     float: left;
@@ -32,11 +37,29 @@
   .ant-menu-horizontal {
     border-bottom: 0;
   }
-  .login {
+  .login-item {
+    margin: 0 20px;
+  }
+  .login,
+  .app-download,
+  .balance-wrap {
     float: right;
+  }
+  .login {
     .login-item {
       margin: 0 10px;
       color: #fff;
+    }
+  }
+  .app-download {
+    .login-item {
+      position: relative;
+      background-color: rgba(40, 40, 40, 0.7);
+      padding: 7px 8px;
+      border-radius: 3px;
+      .anticon {
+        margin-right: 2px;
+      }
     }
   }
 }

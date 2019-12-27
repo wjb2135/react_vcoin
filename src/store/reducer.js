@@ -7,13 +7,14 @@ import {
   GET_BASE_USERINFO,
   SET_MOBILE_VCODE_SENDING,
   SET_EMAIL_VCODE_SENDING,
-  GET_SYS_CONFIG
-} from './actionTypes'
+  GET_SYS_CONFIG,
+  LOGIN_OUT
+} from "./actionTypes";
 
 const defaultState = {
   inputValue: 'input somethingssss',
   list: [],
-  baseUserInfo: {},
+  baseUserInfo: sessionStorage.getItem('baseUserInfo') ? JSON.parse(sessionStorage.getItem('baseUserInfo')) : {},
   mobileVcodeSending: false,
   systemConfig: {}
 }
@@ -73,6 +74,14 @@ export default (state = defaultState, action) => {
   if (action.type === GET_SYS_CONFIG) {
     const newState = JSON.parse(JSON.stringify(state));
     newState.systemConfig = action.data;
+    return newState;
+  }
+
+  if (action.type === LOGIN_OUT) {
+    console.log(1123334);
+    
+    const newState = JSON.parse(JSON.stringify(state));
+    newState.baseUserInfo = {}
     return newState;
   }
 
