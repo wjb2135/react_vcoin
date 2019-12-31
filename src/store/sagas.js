@@ -4,13 +4,15 @@ import {
   GET_MY_LIST,
   SAGA_GET_BASE_USERINFO,
   SAGA_GET_SYS_CONFIG,
-  SAGA_LOGIN_OUT
+  SAGA_LOGIN_OUT,
+  SAGA_RUN_VCODE_LEFT_TIME
 } from "./actionTypes";
 import {
   getListAction,
   getBaseUserInfoAction,
   getSysConfigAction,
-  loginOutAction
+  loginOutAction,
+  runVcodeLeftTimeAction
 } from "./actionCreators";
 import { getCookie, deleteCookie } from "@/assets/js/cookieHandle";
 
@@ -51,5 +53,4 @@ function* loginOut() {
   const action = loginOutAction();
   yield put(action);
 }
-
 export default mySaga

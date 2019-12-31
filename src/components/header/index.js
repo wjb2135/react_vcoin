@@ -3,7 +3,6 @@ import { connect } from "react-redux";
 import { Menu, Dropdown, Popover, Icon } from "antd";
 import { NavLink, Link } from "react-router-dom";
 import {
-  sagaGetSysConfigAction,
   sagaGetBaseUserInfoAction,
   sagaLoginOutAction
 } from "@/store/actionCreators";

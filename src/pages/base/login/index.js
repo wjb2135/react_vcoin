@@ -7,9 +7,10 @@ import NECaptcha from "@components/validator/NECaptcha"
 import { setCookie } from '@/assets/js/cookieHandle'
 import {
   sagaGetBaseUserInfoAction,
-  sagaGetSysConfigAction,
   setMobileVcodeSendingAction,
-  setEmailVcodeSendingAction
+  setEmailVcodeSendingAction,
+  setVisibleDialogVerifyAction,
+  setVerifyTypeAction
 } from "@/store/actionCreators";
 import { connect } from 'react-redux'
 
@@ -57,9 +58,6 @@ class Login extends Component {
     this.setFormData = this.setFormData.bind(this)
     this.setActiveName = this.setActiveName.bind(this)
     this.handleSubmit = this.handleSubmit.bind(this)
-  }
-  componentDidMount() {
-    this.props.getSysConfig()
   }
   showModal = () => {
     this.setState({
@@ -118,7 +116,8 @@ class Login extends Component {
                   break
                 case '1':
                   // 网易滑动拼图验证
-                  self.child.init()
+                  this.props.setVerifyType('mobile')
+                  this.props.setVisibleDialogVerify(true)
                   break
 
                 default:
@@ -346,17 +345,16 @@ class Login extends Component {
         </div>
         {
           // 网易拼图验证器
-          this.props.sysConfig.used_wy_verification == '1' && (
-            <NECaptcha 
-              dialogVerifyVisible={this.state.firstDialogVerifyVisible}
+          this.props.sysConfig.used_wy_verification == '1' && this.props.visibleDialogVerify && (
+            <NECaptcha
               hasCallBack={true}
               formScene="login"
-              closeDialogVerifyVisible={this.closeDialogVerifyVisible}
               setFormVerifyInfo={this.setFormVerifyInfo}
               onRef={this.onRef}
             />
           )
-        }
+
+      }
         {/* 二次验证 */}
         {
           this.state.verifyDialogVisible && (
@@ -378,7 +376,8 @@ class Login extends Component {
 
 const stateToProps = (state) => {
   return {
-    sysConfig: state.systemConfig
+    sysConfig: state.systemConfig,
+    visibleDialogVerify: state.visibleDialogVerify
   }
 }
 
@@ -388,10 +387,6 @@ const dispatchToProp = (dispatch) => {
       const action = sagaGetBaseUserInfoAction();
       dispatch(action);
     },
-    getSysConfig() {
-      const action = sagaGetSysConfigAction();
-      dispatch(action);
-    },
     setMobileVcodeSending(data) {
       const action = setMobileVcodeSendingAction(data);
       dispatch(action);
@@ -399,6 +394,14 @@ const dispatchToProp = (dispatch) => {
     setEmailVcodeSending(data) {
       const action = setEmailVcodeSendingAction(data);
       dispatch(action);
+    },
+    setVisibleDialogVerify(data) {
+      const action = setVisibleDialogVerifyAction(data)
+      dispatch(action)
+    },
+    setVerifyType(data) {
+      const action = setVerifyTypeAction(data)
+      dispatch(action)
     }
   };
 }

@@ -74,7 +74,7 @@ const checkAction = {
 	checkEmpty: function(val){
 	    switch (typeof val){
 	        case 'undefined' : return true;
-	        case 'string'    : if($.trim(val).length == 0) return true; break;
+	        case 'string'    : if(val.trim().length == 0) return true; break;
 	        case 'boolean'   : if(!val) return true; break;
 	        case 'number'    : if(0 === val) return true; break;
 	        case 'object'    :
@@ -152,7 +152,7 @@ objAction = {
 	        ['\\.(\\d?)\\.+', '.$1'], //禁止录入两个以上的点
 	        ['^(\\d+\\.\\d{2}).+', '$1'] //禁止录入小数点后两位以上
 	    ];
-	    for(i=0; i<regStrs.length; i++){
+	    for(var i=0; i<regStrs.length; i++){
 	        var reg = new RegExp(regStrs[i][0]);
 	        th.value = th.value.replace(reg, regStrs[i][1]);
 	    }

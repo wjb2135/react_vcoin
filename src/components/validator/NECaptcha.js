@@ -2,7 +2,13 @@ import React, { Component } from 'react'
 import { Modal, Button } from 'antd';
 import { connect } from "react-redux";
 import { getTimestamp, loadScript } from '@/assets/js/common'
-import { setMobileVcodeSendingAction, setEmailVcodeSendingAction} from "@/store/actionCreators";
+import {
+  setMobileVcodeSendingAction,
+  setEmailVcodeSendingAction,
+  setVisibleDialogVerifyAction,
+  runMobileVcodeLeftTimeAction,
+  setLoadingMobileVcodeSendAction
+} from "@/store/actionCreators";
 var captchaIns = null
 class NECaptcha extends Component {
   constructor(props) {
@@ -21,9 +27,6 @@ class NECaptcha extends Component {
     }
     this.onClose = this.onClose.bind(this)
     this.doneMove = this.doneMove.bind(this)
-  }
-  componentDidMount() {
-    this.props.onRef(this)
   }
   /**
    * 网易滑动拼图验证初始化
@@ -87,9 +90,7 @@ class NECaptcha extends Component {
         this.setState({
           showWarn: false
         })
-        this.props.closeDialogVerifyVisible(false)
-        console.log(this.state.verifyInfo);
-        
+        this.props.setVisibleDialogVerify(false)
         this.props.setFormVerifyInfo(this.state.verifyInfo)
       }
     } else {
@@ -118,14 +119,45 @@ class NECaptcha extends Component {
       }
     }
   }
+  /**
+   * 再次发送短信验证码倒计时
+   */
+  runMobileTimer() {
+    let { mobileLeftTime, setMobileVcodeSending, runMobileVcodeLeftTime } = this.props
+    setMobileVcodeSending(true)
+    let timerId = setInterval(() => {
+      if (mobileLeftTime <= 1) {
+        clearInterval(timerId)
+        setMobileVcodeSending(false)
+      }
+      runMobileVcodeLeftTime(mobileLeftTime--)
+    }, 1000)
+  }
+  /**
+   * 再次发送邮箱验证码倒计时
+   */
+  runEmailTimer() {
+    let { emailLeftTime, setEmailVcodeSending, runEmailVcodeLeftTime } = this.props
+    setEmailVcodeSending(true)
+    let timerId = setInterval(() => {
+      if (emailLeftTime <= 1) {
+        clearInterval(timerId)
+        setEmailVcodeSending(false)
+      }
+      runEmailVcodeLeftTime(emailLeftTime--)
+    }, 1000)
+  }
+  /**
+   * 发送验证码
+   * @param { Oject } data 验证信息
+   */
   sendVerifyCode(data) {
-    let self = this
-    const { verifyType, mobile, email, countryCode, formScene } = this.props
-    let { mobileLeftTime, emailLeftTime } = this.state
+    const { verifyType, mobile, email, countryCode, formScene, isBanding } = this.props
+    this.props.setVisibleDialogVerify(false)
     if (verifyType === 'mobile') {
       // 发送短信验证码
       let formData
-      if (this.isBanding) {
+      if (isBanding) {
         // 绑定手机号
         formData = {
           mobile: mobile,
@@ -140,42 +172,20 @@ class NECaptcha extends Component {
           scene: formScene
         }
       }
-      self.setState({
-        loadingMobileVcodeSend: true
-      })
-      self.postRequestParam('/api/send_sms_vcode', formData).then((res) => {
-        self.setState({
-          loadingMobileVcodeSend: false,
-          mobileVcodeSending: true,
-          mobileLeftTime: 60
-        })
-        self.props.setMobileVcodeSending(true)
-        let timer = setInterval(() => {
-          if (self.state.mobileLeftTime <= 1) {
-            clearInterval(timer)
-            self.setState({
-              mobileVcodeSending: false
-            })
-            self.props.setMobileVcodeSending(false)
-          }
-          self.setState({
-            mobileLeftTime: mobileLeftTime--
-          })
-        }, 1000)
-        self.props.closeDialogVerifyVisible()
+      this.props.setLoadingMobileVcodeSend(true)
+      this.postRequestParam('/api/send_sms_vcode', formData).then((res) => {
+        this.props.setLoadingMobileVcodeSend(false)
+        this.runMobileTimer()
       })
         .catch(() => {
-          self.setState({
-            loadingMobileVcodeSend: false,
-            mobileVcodeSending: false
-          })
-          self.props.setMobileVcodeSending(false)
+          this.props.setLoadingMobileVcodeSend(false)
+          this.props.setMobileVcodeSending(false)
           captchaIns && captchaIns.refresh() // 重新初始化滑动拼图验证
         })
     } else {
       // 发送邮箱验证码
       let formData
-      if (this.isBanding) {
+      if (isBanding) {
         // 绑定手机号
         formData = {
           email: email,
@@ -189,47 +199,32 @@ class NECaptcha extends Component {
           scene: formScene
         }
       }
-      self.setState({
+      this.setState({
         loadingEmailVcodeSend: true
       })
-      self.postRequestParam(`/api/send_email_vcode`, formData).then((res) => {
-        self.setState({
-          loadingEmailVcodeSend: false,
-          emailVcodeSending: true,
-          emailLeftTime: 60
-        })
-        self.props.setEmailVcodeSending(true)
-        let timer = setInterval(() => {
-          if (emailLeftTime <= 1) {
-            clearInterval(timer)
-            self.emailVcodeSending = false
-            self.props.setEmailVcodeSending(false)
-          }
-          self.setState({
-            emailLeftTime: emailLeftTime--
-          })
-        }, 1000)
-        this.props.closeDialogVerifyVisible()
+      this.postRequestParam(`/api/send_email_vcode`, formData).then((res) => {
+        this.props.setLoadingEmailVcodeSend(false)
+        this.runEmailTimer()
       })
         .catch(() => {
-          self.setState({
-            loadingEmailVcodeSend: false,
-            emailVcodeSending: false
-          })
-          self.props.setEmailVcodeSending(false)
+          this.props.setLoadingEmailVcodeSend(false)
+          this.props.setEmailVcodeSending(false)
           captchaIns && captchaIns.refresh() // 重新初始化滑动拼图验证
         })
     }
   }
   onClose() {
-    this.props.closeDialogVerifyVisible()
+    this.props.setVisibleDialogVerify(false)
+  }
+  componentDidMount() {
+    this.init()
   }
   render() {
     return (
       <div>
         <Modal
           title="验证"
-          visible={this.props.dialogVerifyVisible}
+          visible={this.props.visibleDialogVerify}
           width={300}
           footer={null}
           onCancel={this.onClose}
@@ -240,18 +235,36 @@ class NECaptcha extends Component {
     )
   }
 }
-
+const stateToProps = (state) => {
+  return {
+    mobileLeftTime: state.mobileLeftTime,
+    visibleDialogVerify: state.visibleDialogVerify,
+    verifyType: state.verifyType
+  }
+}
 const dispatchToProp = (dispatch) => {
   return {
-    setMobileVcodeSending() {
-      const action = setMobileVcodeSendingAction();
+    setMobileVcodeSending(data) {
+      const action = setMobileVcodeSendingAction(data);
       dispatch(action);
     },
-    setEmailVcodeSending() {
-      const action = setEmailVcodeSendingAction();
+    setEmailVcodeSending(data) {
+      const action = setEmailVcodeSendingAction(data);
       dispatch(action);
+    },
+    setLoadingMobileVcodeSend(data) {
+      const action = setLoadingMobileVcodeSendAction(data)
+      dispatch(action)
+    },
+    setVisibleDialogVerify(verify) {
+      const action = setVisibleDialogVerifyAction(verify)
+      dispatch(action)
+    },
+    runMobileVcodeLeftTime(data) {
+      const action = runMobileVcodeLeftTimeAction(data)
+      dispatch(action)
     }
   };
 }
 
-export default connect(null, dispatchToProp)(NECaptcha)
+export default connect(stateToProps, dispatchToProp)(NECaptcha)
