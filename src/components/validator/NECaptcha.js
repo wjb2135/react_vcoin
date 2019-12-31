@@ -1,5 +1,5 @@
 import React, { Component } from 'react'
-import { Modal, Button } from 'antd';
+import { Modal, Button, message } from 'antd';
 import { connect } from "react-redux";
 import { getTimestamp, loadScript } from '@/assets/js/common'
 import {
@@ -82,41 +82,35 @@ class NECaptcha extends Component {
   doneMove() {
     const { verifyType, hasCallBack } = this.props
     if (hasCallBack) {
-      if (!this.state.mobileMoveDone) {
-        this.setState({
-          showWarn: true
-        })
-      } else {
-        this.setState({
-          showWarn: false
-        })
-        this.props.setVisibleDialogVerify(false)
-        this.props.setFormVerifyInfo(this.state.verifyInfo)
-      }
+      console.log('hasCallBack');
+      this.props.setVisibleDialogVerify(false)
+      this.props.setFormVerifyInfo(this.state.verifyInfo)
     } else {
-      if (verifyType === 'mobile') {
-        if (!this.state.mobileMoveDone) {
-          this.setState({
-            showWarn: true
-          })
-        } else {
-          this.setState({
-            showWarn: false
-          })
-          this.sendVerifyCode(this.state.verifyInfo)
-        }
-      } else {
-        if (!this.state.emailMoveDone) {
-          this.setState({
-            showWarn: true
-          })
-        } else {
-          this.setState({
-            showWarn: false
-          })
-          this.sendVerifyCode(this.state.verifyInfo)
-        }
-      }
+      // console.log('!hasCallBack');
+      
+      // if (verifyType === 'mobile') {
+      //   if (!this.state.mobileMoveDone) {
+      //     this.setState({
+      //       showWarn: true
+      //     })
+      //   } else {
+      //     this.setState({
+      //       showWarn: false
+      //     })
+      //     this.sendVerifyCode(this.state.verifyInfo)
+      //   }
+      // } else {
+      //   if (!this.state.emailMoveDone) {
+      //     this.setState({
+      //       showWarn: true
+      //     })
+      //   } else {
+      //     this.setState({
+      //       showWarn: false
+      //     })
+      //     this.sendVerifyCode(this.state.verifyInfo)
+      //   }
+      // }
     }
   }
   /**

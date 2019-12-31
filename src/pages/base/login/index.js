@@ -49,7 +49,10 @@ class Login extends Component {
       moveMobileDone: false,
       moveEmailDone: false,
       firstDialogVerifyVisible: false,
-      formData: {}
+      formData: {
+        sdk_type: 'web',
+        scene: 'login'
+      }
     }
     this.closeDialogVerifyVisible = this.closeDialogVerifyVisible.bind(this)
     this.submitForm = this.submitForm.bind(this)
@@ -163,8 +166,7 @@ class Login extends Component {
           })
           .catch((err) => {
             this.setState({
-              isLogining: false,
-              formData: {}
+              isLogining: false
             })
             if (err.errcode == 10010) {
               // 表示需要短信、邮件或谷歌验证
@@ -194,6 +196,9 @@ class Login extends Component {
               }
             } else {
               // self.clearVcode()
+              this.setState({
+                formData: {}
+              })
             }
           })
       }
@@ -284,6 +289,8 @@ class Login extends Component {
   setFormData(o) {
     const { setMobileVcodeSending, setEmailVcodeSending } = this.props
     let { formData } = this.state
+    console.log('formData')
+    console.log(formData)
     for (const key in o) {
       if (o.hasOwnProperty(key)) {
         formData[key] = o[key]
