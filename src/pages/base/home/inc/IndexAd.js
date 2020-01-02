@@ -2,9 +2,6 @@ import React, { Component } from "react";
 import '@styles/IndexAd.less'
 
 export default class IndexAd extends Component {
-  constructor(props) {
-    super(props)
-  }
   render() {
     const { index_banner_image } = this.props.sysConfig;
     

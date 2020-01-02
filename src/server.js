@@ -3,7 +3,6 @@ import qs from "qs";
 import { message } from 'antd';
 // import { history } from "react-router-dom";
 import { Component } from "react";
-import store from './store';
 import { getCookie, deleteCookie } from "./assets/js/cookieHandle";
 
 let base = "";
@@ -44,14 +43,14 @@ axios.interceptors.request.use(
 axios.interceptors.response.use(
   res => {
     // 对响应数据做些事
-    if (res.data && res.data.errcode && res.data.errcode != 0) {
-      if (res.data.errcode == 10006) { // 用户未登录或登录状态信息过期
+    if (res.data && res.data.errcode && res.data.errcode !== 0) {
+      if (res.data.errcode === 10006) { // 用户未登录或登录状态信息过期
         // store.dispatch('setBaseLoginUserInfo', '')
         deleteCookie('_TOKEN')
         if (needLinkPageLogin) {
           // history.push('/login')
         }
-      } else if (res.data.errcode == 10010 || res.data.errcode == 10013) {
+      } else if (res.data.errcode === 10010 || res.data.errcode === 10013) {
         return Promise.reject(res.data)
       } else {
         message.error(res.data.errmsg);

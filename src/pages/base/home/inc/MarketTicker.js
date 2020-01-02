@@ -21,6 +21,11 @@ export default class MarketTicker extends Component {
       baseInfoCatalog: []
     };
   }
+  componentWillUnmount() {
+    this.setState = (state,callback)=>{
+      return;
+    };
+  }
   /**
    * socket.io 客户端连接
    * @param {string} url 连接地址

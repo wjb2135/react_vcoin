@@ -32,9 +32,6 @@ class Header extends Component {
   }
   render() {
     const { loginUser, sysConfig } = this.props;
-    console.log(loginUser);
-    console.log(sysConfig);
-    
     let menu, balanceMenu;
     if (loginUser.id) {
       menu = (
@@ -73,7 +70,7 @@ class Header extends Component {
     const qrcodeContent = (
       <div className="qrcode-box">
         <div className="qrcode-l">
-          <QRCode value={sysConfig && sysConfig.app_down_url && sysConfig.app_down_url.android_down_url || ''} />
+          <QRCode value={(sysConfig && sysConfig.app_down_url && sysConfig.app_down_url.android_down_url) || ''} />
           <p>
             <Icon type="mobile" />
             <span>&nbsp;扫码上方二维码</span>

@@ -1,7 +1,6 @@
 import React, { Component } from 'react'
 import { connect } from "react-redux";
 import { Tabs, Form, Input, Modal, Button } from 'antd'
-import { setVerifyTypeAction, setVisibleDialogVerifyAction } from "@/store/actionCreators";
 const { TabPane } = Tabs
 
 class SecondaryVerification extends Component {
@@ -18,14 +17,14 @@ class SecondaryVerification extends Component {
       email_vcode: '',
       dialogVerifyVisible: false,
       verifyType: '',
-      mobileLeftTime: '',
+      mobileLeftTime: 60,
       emailLeftTime: '',
       mobileVcodeSending: false,
       emailVcodeSending: false
     }
     this.onClose = this.onClose.bind(this)
     this.callback = this.callback.bind(this)
-    this.hndleSubmit = this.handleSubmit.bind(this)
+    this.handleSubmitGoogle = this.handleSubmitGoogle.bind(this);
     this.handleClick = this.handleClick.bind(this)
     this.setFormData = this.setFormData.bind(this)
     this.onChangeGoogleCode = this.onChangeGoogleCode.bind(this)
@@ -33,13 +32,16 @@ class SecondaryVerification extends Component {
     // this.sendVerifyCode = this.sendVerifyCode.bind(this)
   }
   componentDidMount() {
-    console.log('asdasd');
-    console.log(this.props);
     this.setState({
       activeName: (this.props.googleVerify && 'google') || (this.props.smsVerify && 'mobile') || (this.props.emailVerify && 'email'),
       mobile: this.props.smsVerify,
       email: this.props.emailVerify
     })
+  }
+  componentWillUnmount() {
+    this.setState = (state,callback)=>{
+      return;
+    };
   }
   handleClick(e) {
     this.setState({
@@ -74,17 +76,18 @@ class SecondaryVerification extends Component {
       self.postRequestParam(`/api/send_sms_vcode`, formData).then((res) => {
         self.setState({
           loadingMobileVcodeSend: false,
-          mobileVcodeSending: true,
-          mobileLeftTime: 60
+          mobileVcodeSending: true
         })
         let timer = setInterval(() => {
           if (mobileLeftTime <= 1) {
             clearInterval(timer)
             self.setState({
               mobileVcodeSending: false,
-              mobileLeftTime: mobileLeftTime--
             })
           }
+          self.setState({
+            mobileLeftTime: mobileLeftTime--
+          });
         }, 1000)
       })
         .catch(() => {
@@ -135,12 +138,11 @@ class SecondaryVerification extends Component {
   callback(key) {
     console.log(key);
   }
-  handleSubmit = e => {
+  handleSubmitGoogle = e => {
     e.preventDefault();
-    this.props.form.validateFields((err, values) => {
+    this.props.form.validateFields(["google_vcode"], (err, values) => {
       if (!err) {
-        console.log('Received values of form: ', values);
-        this.setFormData(values)
+        this.setFormData(values);
       }
     });
   }
@@ -148,7 +150,6 @@ class SecondaryVerification extends Component {
     e.preventDefault();
     this.props.form.validateFields(['mobile_vcode'], (err, values) => {
       if (!err) {
-        console.log('Received values of form: ', values);
         this.setFormData(values)
       }
     });
@@ -162,8 +163,7 @@ class SecondaryVerification extends Component {
    * 获取短信验证码
    */
   getMobileVerifyCode() {
-    let self = this
-    const { form, mobileVcodeSending } = this.props
+    const { mobileVcodeSending } = this.props
     if (mobileVcodeSending) {
       return false
     }
@@ -175,8 +175,8 @@ class SecondaryVerification extends Component {
   }
   render() {
     const { mobileVcodeSending, mobileLeftTime } = this.state;
-    const { getFieldDecorator, getFieldError, isFieldTouched } = this.props.form;
-    const googleVcodeError = isFieldTouched('google_vcode') && getFieldError('google_vcode');
+    const { getFieldDecorator } = this.props.form;
+    // const googleVcodeError = isFieldTouched('google_vcode') && getFieldError('google_vcode');
 
     const addonAfterSendVCode = (
       <>
@@ -199,9 +199,10 @@ class SecondaryVerification extends Component {
         >
           <div className="safe-verify">
             <Tabs onChange={this.handleClick} type="card">
+              {/* 谷歌验证码登陆 */}
               <TabPane tab="谷歌验证" key="1">
-                <Form onSubmit={this.handleSubmit}>
-                  <Form.Item label="谷歌验证码" hasFeedback>
+                <Form onSubmit={this.handleSubmitGoogle}>
+                  <Form.Item label="谷歌验证码">
                     {getFieldDecorator('google_vcode', {
                       rules: [{ required: true, message: '请输入谷歌验证码' }],
                     })(
@@ -217,17 +218,18 @@ class SecondaryVerification extends Component {
                   </Form.Item>
                 </Form>
               </TabPane>
+              {/* 手机登陆 */}
               <TabPane tab="手机验证" key="2">
                 <span>{this.state.mobile}</span>
                 <Form onSubmit={this.handleSubmitMobile}>
-                  <Form.Item label="手机" hasFeedback>
+                  <Form.Item label="手机">
                     <Input
                       defaultValue={this.state.mobile}
                       disabled={true}
                       addonAfter={addonAfterSendVCode}
                     />
                   </Form.Item>
-                  <Form.Item label="手机验证码" hasFeedback>
+                  <Form.Item label="手机验证码">
                     {
                       getFieldDecorator('mobile_vcode', {
                         rules: [{ required: true, message: '请输入手机验证码' }],
@@ -251,23 +253,23 @@ class SecondaryVerification extends Component {
   }
 }
 
-const stateToProps = (state) => {
-  return {
-    mobileVcodeSending: state.mobileVcodeSending
-  }
-}
-const dispatchToProps = (dispatch) => {
-  return {
-    setVisibleDialogVerify(data) {
-      const action = setVisibleDialogVerifyAction(data)
-      dispatch(action)
-    },
-    setVerifyType(data) {
-      const action = setVerifyTypeAction(data)
-      dispatch(action)
-    }
-  }
-}
+// const stateToProps = (state) => {
+//   return {
+//     mobileVcodeSending: state.mobileVcodeSending
+//   }
+// }
+// const dispatchToProps = (dispatch) => {
+//   return {
+//     setVisibleDialogVerify(data) {
+//       const action = setVisibleDialogVerifyAction(data)
+//       dispatch(action)
+//     },
+//     setVerifyType(data) {
+//       const action = setVerifyTypeAction(data)
+//       dispatch(action)
+//     }
+//   }
+// }
 
 const WrappedForm = Form.create({ name:'secondary_verification' })(SecondaryVerification)
 export default connect(null, null)(WrappedForm)

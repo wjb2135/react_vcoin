@@ -1,7 +1,6 @@
 import React, { Component } from "react";
-import { Form, Icon, Input, Button } from 'antd';
+import { Form, Icon, Input, Button, notification } from "antd";
 import { Link } from "react-router-dom";
-import { getTimestamp, loadScript } from '@/assets/js/common'
 import SecondaryVerification from '@components/SecondaryVerification'
 import NECaptcha from "@components/validator/NECaptcha"
 import { setCookie } from '@/assets/js/cookieHandle'
@@ -16,8 +15,8 @@ import { connect } from 'react-redux'
 
 import '@styles/Login.less'
 
-var captchaIns = null
-var captchaInsPop = null
+// var captchaIns = null
+// var captchaInsPop = null
 
 class Login extends Component {
   constructor(props) {
@@ -33,7 +32,6 @@ class Login extends Component {
       showWarn: false,
       warnText: '',
       closable: false,
-      isLogining: false,
       nc: null,
       smsVerify: '', // 短信验证
       emailVerify: '', // 邮箱验证
@@ -62,23 +60,6 @@ class Login extends Component {
     this.setActiveName = this.setActiveName.bind(this)
     this.handleSubmit = this.handleSubmit.bind(this)
   }
-  showModal = () => {
-    this.setState({
-      visible: true,
-    });
-  }
-  handleOk = e => {
-    console.log(e);
-    this.setState({
-      visible: false,
-    });
-  }
-  handleCancel = e => {
-    console.log(e);
-    this.setState({
-      visible: false,
-    });
-  }
   handleSubmit(e) {
     let self = this
     e.preventDefault();
@@ -88,7 +69,7 @@ class Login extends Component {
           isLogining: true
         })
         this.postRequestParam('/api/login', values).then((res) => {
-          if (res.errcode == 0) {
+          if (res.errcode === 0) {
             setCookie('_TOKEN', res.data._token)
           }
         })
@@ -99,7 +80,7 @@ class Login extends Component {
             this.setState({
               isLogining: false
             })
-            if (err.errcode == 10010) {
+            if (err.errcode === 10010) {
               // 表示需要短信、邮件或谷歌验证
               this.setState({
                 verifyDialogVisible: true,
@@ -137,7 +118,6 @@ class Login extends Component {
   }
   submitForm(e) {
     let self = this
-    console.log(this.props.form);
     const { formData } = this.state
     
     this.props.form.validateFields((err, values) => {
@@ -154,10 +134,11 @@ class Login extends Component {
           this.setState({
             isLogining: false
           })
-          console.log(res);
-          
-          if (res.errcode == 0) {
+          if (res.errcode === 0) {
             setCookie('_TOKEN', res.data._token)
+            notification.success({
+              message: "登陆成功"
+            });
           }
         })
           .then((res) => {
@@ -168,7 +149,7 @@ class Login extends Component {
             this.setState({
               isLogining: false
             })
-            if (err.errcode == 10010) {
+            if (err.errcode === 10010) {
               // 表示需要短信、邮件或谷歌验证
               this.setState({
                 verifyDialogVisible: true,
@@ -202,50 +183,6 @@ class Login extends Component {
             }
           })
       }
-    })
-  }
-  /**
-   * 网易滑动拼图验证初始化
-   */
-  initNECaptcha() {
-    let self = this
-    let lang = ''
-    switch (localStorage.getItem('lang')) {
-      case 'zh-cn':
-        lang = 'zh-CN'
-        break
-      case 'zh-hk':
-        lang = 'zh-TW'
-        break
-      case 'en-us':
-        lang = 'en'
-        break
-
-      default:
-        break
-    }
-    let url = 'http://cstaticdun.126.net/load.min.js' + '?t=' + getTimestamp(1 * 60 * 1000) // 时长1分钟，建议时长分钟级别
-    loadScript(url, function () {
-      // 进行初始化验证码等后续逻辑
-      window.initNECaptcha({
-        lang: lang,
-        captchaId: '8a0220bbde4b46c5a52a87813dce01a8',
-        element: '#move-b',
-        mode: 'float',
-        width: '520px',
-        onReady: function (instance) {
-          // 验证码一切准备就绪，此时可正常使用验证码的相关功能
-        },
-        onVerify: function (err, data) {
-          if (err) return // 当验证失败时，内部会自动refresh方法，无需手动再调用一次
-          self.form.verify_info = data.validate
-        }
-      }, function onload(instance) {
-        captchaIns = instance
-      }, function onerror(err) {
-        // 初始化失败后触发该函数，err对象描述当前错误信息
-        console.log(err)
-      })
     })
   }
   /**
@@ -335,6 +272,7 @@ class Login extends Component {
                 <Input
                   prefix={<Icon type="lock" style={{ color: 'rgba(0,0,0,.25)' }} />}
                   type="password"
+                  autoComplete="off"
                   placeholder="请输入密码"
                 />,
               )}
@@ -352,7 +290,7 @@ class Login extends Component {
         </div>
         {
           // 网易拼图验证器
-          this.props.sysConfig.used_wy_verification == '1' && this.props.visibleDialogVerify && (
+          this.props.sysConfig.used_wy_verification === '1' && this.props.visibleDialogVerify && (
             <NECaptcha
               hasCallBack={true}
               formScene="login"

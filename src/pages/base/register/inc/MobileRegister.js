@@ -27,6 +27,8 @@ class mobileRegister extends Component {
     this.handleSubmit = this.handleSubmit.bind(this);
     this.getMobileVerifyCode = this.getMobileVerifyCode.bind(this);
     this.handleChangeUserAgreement = this.handleChangeUserAgreement.bind(this);
+    this.onSecondAreaCodeChange = this.onSecondAreaCodeChange.bind(this);
+    this.onChangeCountry = this.onChangeCountry.bind(this);
   }
   componentDidMount() {}
   handleSubmit = e => {
@@ -42,7 +44,7 @@ class mobileRegister extends Component {
           this.setState({
             isRegistering: false
           })
-          if (res.errcode == 0) {
+          if (res.errcode === 0) {
             message.success('注册成功');
             setTimeout(() => {
               self.props.history.push('/');
@@ -69,15 +71,12 @@ class mobileRegister extends Component {
       checkNick: e.target.checked
     })
   }
-  handleChanges(value) {
-    console.log(`selected ${value}`);
-  }
   /**
    * 获取短信验证码
    */
   getMobileVerifyCode() {
     let self = this
-    const { form, appID } = this.props
+    const { form } = this.props
     if (self.state.mobileVerifyCodeSended) {
       return false
     }
@@ -103,6 +102,36 @@ class mobileRegister extends Component {
       }
     })
   }
+  /**
+   * 国籍联动
+   */
+  onSecondAreaCodeChange(val) {
+    let { options } = this.props;
+    options.forEach((v, i, arr) => {
+      v.option.forEach((value, index, array) => {
+        if (val === value.area_code) {
+          this.props.form.setFieldsValue({
+            country: value.name_en
+          });
+        }
+      })
+    })
+  }
+  /**
+   * 手机区号联动
+   */
+  onChangeCountry(val) {
+    let { options } = this.props;
+    options.forEach((v, i, arr) => {
+      v.option.forEach((value, index, array) => {
+        if (val === value.name_en) {
+          this.props.form.setFieldsValue({
+            country_code: value.area_code,
+          });
+        }
+      })
+    })
+  }
   render() {
     let { options, mobileLeftTime, mobileVcodeSending } = this.props;
     const { getFieldDecorator } = this.props.form;
@@ -114,7 +143,7 @@ class mobileRegister extends Component {
         let arr = options[i_i].option
         for (var i = 0; i < arr.length; i++) {
           for (var j = i + 1; j < arr.length; j++) {
-            if (arr[i].name_en == arr[j].name_en || arr[i].area_code == arr[j].area_code) {
+            if (arr[i].name_en === arr[j].name_en || arr[i].area_code === arr[j].area_code) {
               arr.splice(j, 1);
               j--;
             }
@@ -151,7 +180,7 @@ class mobileRegister extends Component {
     const prefixSelector = getFieldDecorator("country_code", {
       rules: [{ required: true, message: "请选择手机区号" }]
     })(
-      <Select style={{ width: 120 }}>{optionItemAreaCode}</Select>
+      <Select style={{ width: 120 }} onChange={this.onSecondAreaCodeChange}>{optionItemAreaCode}</Select>
     )
     const addonAfterSendVCode = (
       <>
@@ -173,7 +202,7 @@ class mobileRegister extends Component {
           <Form.Item label="国籍">
             {getFieldDecorator("country", {
               rules: [{ required: true, message: "请选择国籍" }]
-            })(<Select className="select-country" onChange={this.handleChanges}>{optionItem}</Select>)}
+            })(<Select className="select-country" onChange={this.onChangeCountry}>{optionItem}</Select>)}
           </Form.Item>
           <Form.Item label="手机号码">
             {getFieldDecorator("mobile", {
@@ -217,7 +246,7 @@ class mobileRegister extends Component {
         </Form>
         {
           // 网易拼图验证器
-          this.props.sysConfig.used_wy_verification == '1' && this.props.visibleDialogVerify && (
+          this.props.sysConfig.used_wy_verification === '1' && this.props.visibleDialogVerify && (
             <NECaptcha
               formScene="register"
               mobile={this.state.mobile}

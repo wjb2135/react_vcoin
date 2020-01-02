@@ -40,21 +40,21 @@ class AppFooter extends Component {
     if (sysConfig) {
       if (sysConfig.buttom_community_links && sysConfig.buttom_community_links.length > 0) {
         buttomCommunityLinksItem = sysConfig.buttom_community_links.map((item, index) => (
-          <a href={item.link} title={item.name} className="icon-some-chat" target="_blank" key={index}>
-            <img src={item.icon} className="icon-community" />
+          <a href={item.link} title={item.name} className="icon-some-chat" target="_blank" key={index} rel="noopener noreferrer">
+            <img src={item.icon} className="icon-community" alt="icon-community" />
           </a>
         ))
       }
       if (sysConfig.buttom_contacts && sysConfig.buttom_contacts.length > 0) {
         buttomContactsItem = sysConfig.buttom_contacts.map((item, index) => (
           <div className="no_link" key={index}>
-            {item.caption}：<a href={item.link} target="_blank">{item.value}</a>
+            {item.caption}：<a href={item.link} target="_blank" rel="noopener noreferrer">{item.value}</a>
           </div>
         ))
       }
       if (sysConfig.buttom_friendship_links && sysConfig.buttom_friendship_links.length > 0) {
         buttomFriendshipLinksItem = sysConfig.buttom_friendship_links.map((item, index) => (
-          <a className="text" href={item.link} target="_blank" key={index}>{item.name}</a>
+          <a className="text" href={item.link} target="_blank" key={index} rel="noopener noreferrer">{item.name}</a>
         ))
       }
     }
@@ -63,7 +63,7 @@ class AppFooter extends Component {
         <div className="footer-main">
           <div className="footer-left">
             <div className="logo">
-              <img src={sysConfig.site_logo} alt="" style={{ maxWidth:150}} />
+              <img src={sysConfig.site_logo} alt="logo" style={{ maxWidth:150}} />
             </div>
             <div className="list">
               <div>

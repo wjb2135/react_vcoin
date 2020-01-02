@@ -5,14 +5,12 @@ import {
   SAGA_GET_BASE_USERINFO,
   SAGA_GET_SYS_CONFIG,
   SAGA_LOGIN_OUT,
-  SAGA_RUN_VCODE_LEFT_TIME
 } from "./actionTypes";
 import {
   getListAction,
   getBaseUserInfoAction,
   getSysConfigAction,
-  loginOutAction,
-  runVcodeLeftTimeAction
+  loginOutAction
 } from "./actionCreators";
 import { getCookie, deleteCookie } from "@/assets/js/cookieHandle";
 
@@ -45,7 +43,7 @@ function* getSysConfig() {
 }
 function* loginOut() {
   if (!getCookie("_TOKEN")) return;
-  const res = yield axios.post("/api/logout", {
+  yield axios.post("/api/logout", {
     '_token': getCookie('_TOKEN')
   })
   sessionStorage.removeItem("baseUserInfo");

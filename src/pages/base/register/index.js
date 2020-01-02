@@ -6,8 +6,8 @@ import EmailRegister from "./inc/EmailRegister";
 import "@styles/Register.less";
 const { TabPane } = Tabs;
 
-var captchaIns = null
-var captchaInsPop = null
+// var captchaIns = null
+// var captchaInsPop = null
 
 class register extends Component {
   constructor(props) {
@@ -50,9 +50,9 @@ class register extends Component {
             <TabPane tab="手机注册" key="mobile">
               <MobileRegister options={this.state.options} initNc={this.initVerifyPopNc.bind(this)} changeDialogVerifyVisible={this.changeDialogVerifyVisible.bind(this)} />
             </TabPane>
-            <TabPane tab="邮箱注册" key="email">
+            {/* <TabPane tab="邮箱注册" key="email">
               <EmailRegister />
-            </TabPane>
+            </TabPane> */}
           </Tabs>
         </div>
       </div>

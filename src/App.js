@@ -22,9 +22,6 @@ import "@styles/resetAnt.less";
 const { Footer, Content } = Layout;
 
 class App extends Component {
-  constructor(props) {
-    super(props);
-  }
   componentDidMount() {
     this.props.getSysConfig()
   }

@@ -40,8 +40,8 @@ const checkAction = {
 	 * @return {Boolean}       true: 合法; false: 不合法
 	 */
 	checkMobilePhone: function(value){
-		var regMobile = 11 && /^((13|14|15|17|18)[0-9]{1}\d{8})$/;
-		if(value.trim()!='')
+		// var regMobile = 11 && /^((13|14|15|17|18)[0-9]{1}\d{8})$/;
+		if(value.trim()!=='')
 			return true;
 	    else
 	        return false;
@@ -53,7 +53,7 @@ const checkAction = {
 	 * @return {Boolean}     true: 合法; false: 不合法
 	 */
 	checkEmail: function(val){
-		var reg = /^\w+((-\w+)|(\.\w+))*\@[A-Za-z0-9]+((\.|-)[A-Za-z0-9]+)*\.[A-Za-z0-9]+$/; 
+		var reg = /^\w+((-\w+)|(\.\w+))*\t[A-Za-z0-9]+((\.|-)[A-Za-z0-9]+)*\.[A-Za-z0-9]+$/; 
 		return reg.test(val);
 	},
 
@@ -74,16 +74,18 @@ const checkAction = {
 	checkEmpty: function(val){
 	    switch (typeof val){
 	        case 'undefined' : return true;
-	        case 'string'    : if(val.trim().length == 0) return true; break;
+	        case 'string'    : if(val.trim().length === 0) return true; break;
 	        case 'boolean'   : if(!val) return true; break;
 	        case 'number'    : if(0 === val) return true; break;
 	        case 'object'    :
 	            if(null === val) return true;
-	            if(undefined !== val.length && val.length==0) return true;
+	            if(undefined !== val.length && val.length===0) return true;
 	            for(var k in val){return false;} return true;
-	            break;
+              break;
+          default:
+            break;
 	    }
-	    return false;
+      return false;
 	}
 
 },
@@ -101,7 +103,7 @@ objAction = {
 	 */
 	removeByValue: function(arr, val){
 	 	for(var i=0; i<arr.length; i++) {
-	    	if(arr[i] == val) {
+	    	if(arr[i] === val) {
 	      		arr.splice(i, 1);
 	      		break;
 	    	}
@@ -115,7 +117,7 @@ objAction = {
 	 */
 	getStringLength: function(str){
 	 	str = str.trim();
-	    if(str=="")
+	    if(str==="")
 	        return 0; 
 	        
 	    var length=0; 
@@ -137,7 +139,7 @@ objAction = {
 	getQueryString: function(name) {
      	var reg = new RegExp("(^|&)"+ name +"=([^&]*)(&|$)");
      	var r = window.location.search.substr(1).match(reg);
-     	if(r!=null)return  unescape(r[2]); return null;
+     	if(r!==null)return  unescape(r[2]); return null;
 	},
 
 	/**

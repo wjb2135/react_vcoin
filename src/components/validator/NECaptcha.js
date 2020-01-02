@@ -1,5 +1,5 @@
 import React, { Component } from 'react'
-import { Modal, Button, message } from 'antd';
+import { Modal } from 'antd';
 import { connect } from "react-redux";
 import { getTimestamp, loadScript } from '@/assets/js/common'
 import {
@@ -33,7 +33,7 @@ class NECaptcha extends Component {
    */
   init() {
     let self = this
-    let url = 'http://cstaticdun.126.net/load.min.js' + '?t=' + getTimestamp(1 * 60 * 1000) // 时长1分钟，建议时长分钟级别
+    let url = `http://cstaticdun.126.net/load.min.js?t=${getTimestamp(1 * 60 * 1000)}`; // 时长1分钟，建议时长分钟级别
     const { verifyType, hasCallBack } = this.props
     loadScript(url, function () {
       // 进行初始化验证码等后续逻辑
@@ -86,31 +86,31 @@ class NECaptcha extends Component {
       this.props.setVisibleDialogVerify(false)
       this.props.setFormVerifyInfo(this.state.verifyInfo)
     } else {
-      // console.log('!hasCallBack');
+      console.log('!hasCallBack');
       
-      // if (verifyType === 'mobile') {
-      //   if (!this.state.mobileMoveDone) {
-      //     this.setState({
-      //       showWarn: true
-      //     })
-      //   } else {
-      //     this.setState({
-      //       showWarn: false
-      //     })
-      //     this.sendVerifyCode(this.state.verifyInfo)
-      //   }
-      // } else {
-      //   if (!this.state.emailMoveDone) {
-      //     this.setState({
-      //       showWarn: true
-      //     })
-      //   } else {
-      //     this.setState({
-      //       showWarn: false
-      //     })
-      //     this.sendVerifyCode(this.state.verifyInfo)
-      //   }
-      // }
+      if (verifyType === 'mobile') {
+        if (!this.state.mobileMoveDone) {
+          this.setState({
+            showWarn: true
+          })
+        } else {
+          this.setState({
+            showWarn: false
+          })
+          this.sendVerifyCode(this.state.verifyInfo)
+        }
+      } else {
+        if (!this.state.emailMoveDone) {
+          this.setState({
+            showWarn: true
+          })
+        } else {
+          this.setState({
+            showWarn: false
+          })
+          this.sendVerifyCode(this.state.verifyInfo)
+        }
+      }
     }
   }
   /**
