@@ -2,12 +2,7 @@ import React, { Component } from 'react'
 import { connect } from "react-redux";
 import { Tabs } from "antd";
 import MobileRegister from "./inc/MobileRegister";
-import EmailRegister from "./inc/EmailRegister";
-import "@styles/Register.less";
 const { TabPane } = Tabs;
-
-// var captchaIns = null
-// var captchaInsPop = null
 
 class register extends Component {
   constructor(props) {
@@ -48,7 +43,11 @@ class register extends Component {
           <h2>欢迎注册</h2>
           <Tabs defaultActiveKey="1" onChange={this.callback}>
             <TabPane tab="手机注册" key="mobile">
-              <MobileRegister options={this.state.options} initNc={this.initVerifyPopNc.bind(this)} changeDialogVerifyVisible={this.changeDialogVerifyVisible.bind(this)} />
+              <MobileRegister
+                options={this.state.options}
+                initNc={this.initVerifyPopNc.bind(this)}
+                changeDialogVerifyVisible={this.changeDialogVerifyVisible.bind(this)}
+              />
             </TabPane>
             {/* <TabPane tab="邮箱注册" key="email">
               <EmailRegister />
@@ -65,6 +64,5 @@ const stateToProps = (state) => {
     sysConfig: state.systemConfig,
     visibleDialogVerify: state.visibleDialogVerify
   }
-}
-
-export default connect(stateToProps, null)(register)
+};
+export default connect(stateToProps, null)(register);

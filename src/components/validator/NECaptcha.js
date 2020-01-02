@@ -212,6 +212,7 @@ class NECaptcha extends Component {
   }
   componentDidMount() {
     this.init()
+    this.props.onRef(this);
   }
   render() {
     return (

@@ -1,16 +1,10 @@
 import React, { Component } from "react"
-import { Tabs, Input, Table } from "antd";
 import io from "socket.io-client"
-import "@styles/MarketTicker.less"
+import UIMarketTicker from "@components/MarketTicker";
 
-const { TabPane } = Tabs
-const { Search } = Input
 let socket = null
 
 export default class MarketTicker extends Component {
-  callback(key) {
-    console.log(key);
-  }
   constructor(props) {
     super(props)
     this.state = {
@@ -25,6 +19,9 @@ export default class MarketTicker extends Component {
     this.setState = (state,callback)=>{
       return;
     };
+  }
+  callback(key) {
+    console.log(key);
   }
   /**
    * socket.io 客户端连接
@@ -84,7 +81,6 @@ export default class MarketTicker extends Component {
         }
       }
     })
-
     socket.on('base_info_catalog', function (res) {
       if (res) {
         self.setState({
@@ -92,7 +88,6 @@ export default class MarketTicker extends Component {
         });
       }
     })
-
     socket.on('future_base_info', function (res) {
       if (res) {
         self.setState({
@@ -105,64 +100,6 @@ export default class MarketTicker extends Component {
     this.socketInit('http://47.74.226.235:30031')
   }
   render() {
-    const { marketList } = this.state;
-    const columns = [
-      {
-        title: "市场",
-        dataIndex: "trade_vcoin_code",
-        key: "trade_vcoin_code",
-        render: text => <a>{text}</a>
-      },
-      {
-        title: "最新价",
-        dataIndex: "price",
-        key: "price"
-      },
-      {
-        title: "24h涨幅",
-        dataIndex: "increase",
-        key: "increase"
-      },
-      {
-        title: "24h最高价",
-        dataIndex: "max_price",
-        key: "max_price"
-      },
-      {
-        title: "24h最低价",
-        dataIndex: "min_price",
-        key: "min_price"
-      },
-      {
-        title: "24h成交量",
-        dataIndex: "totle",
-        key: "totle"
-      }
-    ];
-    return (
-      <div className="market-ticker">
-        <Search
-          placeholder="input search text"
-          onSearch={value => console.log(value)}
-          style={{ width: 200 }}
-          className="input-search"
-        />
-        <Tabs activeKey="2" onChange={this.callback} type="card">
-          <TabPane tab="自选" key="1">
-            Content of Tab Pane 1
-          </TabPane>
-          <TabPane tab="全部行情" key="2">
-            <Table
-              columns={columns}
-              rowKey={(record, index) => index}
-              dataSource={
-                (marketList && marketList.length > 0 && marketList[0].list) ||
-                []
-              }
-            />
-          </TabPane>
-        </Tabs>
-      </div>
-    );
+    return <UIMarketTicker {...this.state} callback={this.callback.bind(this)} />;
   }
 }

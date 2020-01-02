@@ -1,5 +1,5 @@
-import React from 'react';
-import '@styles/IndexAd.less'
+import React from "react";
+import "@styles/IndexAd.less";
 export default function IndexAd(props) {
   const { sysConfig } = props;
   return (
