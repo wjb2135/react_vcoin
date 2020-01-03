@@ -31,7 +31,9 @@ class Header extends Component {
     this.props.loginOutAction()
   }
   render() {
-    const { loginUser, sysConfig, match } = this.props;
+    console.log(123456);
+    
+    const { loginUser, sysConfig, match, location } = this.props;
     let menu, balanceMenu;
     if (loginUser.id) {
       menu = (
@@ -82,11 +84,12 @@ class Header extends Component {
     let selectedKeys = [];
     let selectedKeysArr = {
       'home': ['/', '/home'],
-      'fabi': ['/tctrade/']
+      'fabi': ['/tctrade/', '/tctrade/trade/buy', '/tctrade/trade/sell', '/tctrade/orders/order', '/tctrade/orders/advertisement', '/tctrade/ident']
     }
+    
     for (const key in selectedKeysArr) {
       if (selectedKeysArr.hasOwnProperty(key)) {
-        selectedKeysArr[key].includes(match.path) && selectedKeys.push(key)
+        selectedKeysArr[key].includes(location.pathname) && selectedKeys.push(key)
       }
     }
 
@@ -97,7 +100,7 @@ class Header extends Component {
         </div>
         <Menu
           onClick={this.handleClick}
-          selectedKeys={[this.state.current]}
+          selectedKeys={selectedKeys}
           mode="horizontal"
           className="nav"
         >

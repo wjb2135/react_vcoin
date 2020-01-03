@@ -11,6 +11,12 @@ import "@styles/layoutSideMain.less";
 const { SubMenu } = Menu;
 
 export default class TradeIndex extends Component {
+  constructor(props) {
+    super(props)
+    this.state = {
+      token: getCookie('_TOKEN')
+    }
+  }
   handleClick = e => {
     console.log('click ', e);
   }
@@ -47,25 +53,28 @@ export default class TradeIndex extends Component {
     $('.layout-main').css({'minHeight': side_h + 'px'})
   }
   render() {
-    const token = getCookie('_TOKEN')
+    const { token } = this.state;
+    console.log('token');
+    console.log(token);
+    
     const { location, match } = this.props;
     console.log(this.props);
     let defaultSelectedKeys = [];
     let defaultOpenKeys = [];
     let selectedKeys = {
-      'buy': '/tctrade/trade/buy',
-      'sell': '/tctrade/trade/sell',
-      'order': '/tctrade/orders/order',
-      'ad': '/tctrade/orders/advertisement',
-      'ident': '/tctrade/ident',
+      'buy': ['/tctrade/', '/tctrade/trade/buy'],
+      'sell': ['/tctrade/trade/sell'],
+      'order': ['/tctrade/orders/order'],
+      'ad': ['/tctrade/orders/advertisement'],
+      'ident': ['/tctrade/ident'],
     }
     let openKeys = {
-      'tradeCenter': ['/tctrade/trade/buy', '/tctrade/trade/sell'],
+      'tradeCenter': ['/tctrade/', '/tctrade/trade/buy', '/tctrade/trade/sell'],
       'orderCenter': ['/tctrade/orders/order', 'tctrade/orders/advertisement']
     }
     for (const key in selectedKeys) {
       if (selectedKeys.hasOwnProperty(key)) {
-        (selectedKeys[key] == location.pathname) && defaultSelectedKeys.push(key)
+        selectedKeys[key].includes(location.pathname) && defaultSelectedKeys.push(key)
       }
     }
     for (const key in openKeys) {

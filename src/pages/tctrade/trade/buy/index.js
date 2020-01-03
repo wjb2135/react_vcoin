@@ -130,6 +130,11 @@ class TcTradeBuy extends Component {
       ticketCurrencyType: ""
     };
   }
+  componentWillUnmount() {
+    this.setState = (state, callback) => {
+      return;
+    };
+  }
   async componentDidMount() {
     const { baseLoginUserInfo, getBaseUserInfo } = this.props
     this.getCurrencyTypes();
