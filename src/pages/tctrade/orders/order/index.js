@@ -15,6 +15,7 @@ class order extends Component {
       currencyType: ''
     }
     this.callback = this.callback.bind(this)
+    this.orderDetail = this.orderDetail.bind(this)
   }
   componentDidMount() {
     this.getData('0')
@@ -57,7 +58,7 @@ class order extends Component {
         title: '订单号',
         dataIndex: 'id',
         render: (text, record, index) => (
-          <span style={{ color: '#1d96e3' }} className="name" onClick={self.orderDetail(text)}>{text}</span>
+          <span style={{ color: '#1d96e3' }} className="name" onClick={self.orderDetail.bind(this, text)}>{text}</span>
         )
       },
       {

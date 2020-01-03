@@ -19,7 +19,7 @@ import {
 const defaultState = {
   inputValue: 'input somethingssss',
   list: [],
-  baseUserInfo: sessionStorage.getItem('baseUserInfo') ? JSON.parse(sessionStorage.getItem('baseUserInfo')) : {},
+  baseUserInfo: (sessionStorage.getItem('baseUserInfo') && sessionStorage.getItem('baseUserInfo') !== 'undefined') ? JSON.parse(sessionStorage.getItem('baseUserInfo')) : {},
   systemConfig: {},
   appID: 'FFFF00000000017AAB5E',
   visibleDialogVerify: false,

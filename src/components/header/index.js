@@ -1,7 +1,7 @@
 import React, { Component } from 'react'
 import { connect } from "react-redux";
 import { Menu, Dropdown, Popover, Icon } from "antd";
-import { NavLink, Link } from "react-router-dom";
+import { withRouter, NavLink, Link } from "react-router-dom";
 import {
   sagaGetBaseUserInfoAction,
   sagaLoginOutAction
@@ -15,7 +15,7 @@ class Header extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      current: "home"
+      current: "fabi"
     };
     this.loginOut = this.loginOut.bind(this)
   }
@@ -31,7 +31,7 @@ class Header extends Component {
     this.props.loginOutAction()
   }
   render() {
-    const { loginUser, sysConfig } = this.props;
+    const { loginUser, sysConfig, match } = this.props;
     let menu, balanceMenu;
     if (loginUser.id) {
       menu = (
@@ -78,6 +78,18 @@ class Header extends Component {
         </div>
       </div>
     );
+
+    let selectedKeys = [];
+    let selectedKeysArr = {
+      'home': ['/', '/home'],
+      'fabi': ['/tctrade/']
+    }
+    for (const key in selectedKeysArr) {
+      if (selectedKeysArr.hasOwnProperty(key)) {
+        selectedKeysArr[key].includes(match.path) && selectedKeys.push(key)
+      }
+    }
+
     return (
       <div className="app-header">
         <div className="logo">
@@ -172,4 +184,4 @@ const dispatchToProp = (dispatch) => {
   }
 }
 
-export default connect(stateToProps, dispatchToProp)(Header)
+export default withRouter(connect(stateToProps, dispatchToProp)(Header))
