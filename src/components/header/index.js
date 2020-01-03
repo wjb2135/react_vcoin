@@ -94,7 +94,11 @@ class Header extends Component {
               首页
             </NavLink>
           </Menu.Item>
-          <Menu.Item key="fabi">法币交易</Menu.Item>
+          <Menu.Item key="fabi">
+            <NavLink to="/tctrade/" activeClassName="selected">
+              法币交易
+            </NavLink>
+          </Menu.Item>
           <Menu.Item key="bibi">币币交易</Menu.Item>
           <Menu.Item key="margin">杠杠交易</Menu.Item>
           <Menu.Item key="future">合约交易</Menu.Item>

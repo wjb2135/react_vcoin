@@ -34,14 +34,28 @@ class App extends Component {
           <Content>
             <Switch>
               {Routers.map((item, index) => {
-                return <Route key={index} path={item.path} exact render={props =>
-                  (!item.auth ? (<item.component {...props} />) : (token ? <item.component {...props} /> : <Redirect to={{
-                    pathname: '/login',
-                    state: { from: props.location }
-                  }} />)
-                  )} />
+                return (
+                  <Route
+                    key={index}
+                    path={item.path}
+                    exact={!item.isChild}
+                    render={props =>
+                      !item.auth ? (
+                        <item.component {...props} />
+                      ) : token ? (
+                        <item.component {...props} /> 
+                      ) : (
+                        <Redirect
+                          to={{
+                            pathname: "/login",
+                            state: { from: props.location }
+                          }}
+                        />
+                      )
+                    }
+                  />
+                );
               })}
-              <Route component={NotFound} />
             </Switch>
           </Content>
           <Footer>
@@ -49,7 +63,7 @@ class App extends Component {
           </Footer>
         </Layout>
       </Router>
-    )
+    );
   }
 }
 

@@ -1,7 +1,7 @@
 import React, { Component } from "react";
+import IndexAd from "@components/IndexAd";
 import Banner from "./inc/Banner";
 import MarketTicker from "./inc/MarketTicker";
-import IndexAd from "@components/IndexAd";
 import { Layout } from "antd";
 import { connect } from "react-redux";
 const { Content } = Layout;
