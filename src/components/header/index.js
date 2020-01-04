@@ -35,7 +35,7 @@ class Header extends Component {
     
     const { loginUser, sysConfig, match, location } = this.props;
     let menu, balanceMenu;
-    if (loginUser.id) {
+    if (loginUser && loginUser.id) {
       menu = (
         <Menu>
           <Menu.Item>
@@ -84,7 +84,8 @@ class Header extends Component {
     let selectedKeys = [];
     let selectedKeysArr = {
       'home': ['/', '/home'],
-      'fabi': ['/tctrade/', '/tctrade/trade/buy', '/tctrade/trade/sell', '/tctrade/orders/order', '/tctrade/orders/advertisement', '/tctrade/ident']
+      'fabi': ['/tctrade/', '/tctrade/trade/buy', '/tctrade/trade/sell', '/tctrade/orders/order', '/tctrade/orders/advertisement', '/tctrade/ident'],
+      'uc': ['/uc/security', '/uc/account', '/uc/authenticate', '/uc/assets', '/uc/lockstore', '/uc/extension', '/uc/invitation_code', '/uc/device_manage']
     }
     
     for (const key in selectedKeysArr) {
@@ -117,10 +118,14 @@ class Header extends Component {
           <Menu.Item key="bibi">币币交易</Menu.Item>
           <Menu.Item key="margin">杠杠交易</Menu.Item>
           <Menu.Item key="future">合约交易</Menu.Item>
-          <Menu.Item key="uc">用户中心</Menu.Item>
+          <Menu.Item key="uc">
+            <NavLink to="/uc/security" activeClassName="selected">
+              用户中心
+            </NavLink>
+          </Menu.Item>
         </Menu>
         <div className="login">
-          {loginUser.id ? (
+          {loginUser && loginUser.id ? (
             <Dropdown overlay={menu} placement="bottomRight">
               <span>
                 {loginUser.nickname ||
@@ -156,7 +161,7 @@ class Header extends Component {
             </span>
           </Popover>
         </div>
-        {loginUser.id && (
+        {loginUser && loginUser.id && (
           <div className="balance-wrap">
             <Dropdown overlay={balanceMenu} placement="bottomCenter">
               <span>资产管理</span>
