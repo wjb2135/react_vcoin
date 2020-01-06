@@ -13,7 +13,8 @@ import {
   LOGIN_OUT,
   SET_LOADING_MOBILE_VCODE_SEND,
   RUN_MOBILE_VCODE_LEFT_TIME,
-  RUN_EMAIL_VCODE_LEFT_TIME
+  RUN_EMAIL_VCODE_LEFT_TIME,
+  SET_VISIBLE_NICKNAME_FORM
 } from "./actionTypes";
 
 const defaultState = {
@@ -26,7 +27,8 @@ const defaultState = {
   verifyType: '',
   mobileLeftTime: 60,
   mobileVcodeSending: false,
-  loadingMobileVcodeSend: false
+  loadingMobileVcodeSend: false,
+  visibleNickNameForm: false
 }
 
 export default (state = defaultState, action) => {
@@ -115,6 +117,11 @@ export default (state = defaultState, action) => {
     const newState = JSON.parse(JSON.stringify(state))
     console.log(action.index);
     newState.list.splice(action.index, 1)
+    return newState
+  }
+  if (action.type === SET_VISIBLE_NICKNAME_FORM) {
+    const newState = JSON.parse(JSON.stringify(state))
+    newState.visibleNickNameForm = action.data
     return newState
   }
 

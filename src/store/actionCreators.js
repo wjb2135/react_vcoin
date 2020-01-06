@@ -16,7 +16,8 @@ import {
   ADD_ITEM,
   DELETE_ITEM,
   RUN_MOBILE_VCODE_LEFT_TIME,
-  RUN_EMAIL_VCODE_LEFT_TIME
+  RUN_EMAIL_VCODE_LEFT_TIME,
+  SET_VISIBLE_NICKNAME_FORM
 } from "./actionTypes";
 
 import axios from 'axios'
@@ -92,6 +93,10 @@ export const runMobileVcodeLeftTimeAction = (data) => ({
 })
 export const runEmailVcodeLeftTimeAction = (data) => ({
   type: RUN_EMAIL_VCODE_LEFT_TIME,
+  data
+})
+export const setVisibleNickNameFormAction = (data) => ({
+  type: SET_VISIBLE_NICKNAME_FORM,
   data
 })
 

@@ -1,8 +1,10 @@
 import React, { Component } from 'react';
 import { connect } from "react-redux";
-import { getBaseUserInfoAction } from "@/store/actionCreators";
+import { Modal } from 'antd';
 import UserRecord from "./inc/UserRecord";
 import UserIdentStatus from "./inc/UserIdentStatus";
+import SetNickNameForm from "./inc/NickNameForm";
+import { setVisibleNickNameFormAction } from '@/store/actionCreators';
 
 import '@styles/ucSecurity.less'
 
@@ -16,7 +18,6 @@ class Security extends Component {
       capitalPsStatus: false,
       signStatus: false,
       isShowPopup: false,
-      userInfo: '',
       loading: true,
       google_verify_enabled: false, // 当前谷歌验证是否开启
       sms_verify_enabled: false, // 当前短信验证是否开启
@@ -54,38 +55,56 @@ class Security extends Component {
     this.verifyEnabledType = 'google'
     this.isShowGoogleVerifyDialog = true
   }
+  /**
+   * 修改昵称对话框
+   */
+  setVisible(data) {
+    this.props.setVisibleNickNameForm(data)
+  }
   render() {
-    const { userInfo } = this.props
-    const nickname = userInfo && userInfo.nickname.substring(0, 1)
-    const securityLevelText = {
-      '0': '低',
-      '1': '中',
-      '2': '高'
-    }
-    console.log(userInfo.nickname);
-    
+    const { visibleNickNameForm } = this.props
     return (
       <div className="page-security">
+        {/* 用户信息 */}
         <UserRecord {...this.state} {...this.props} />
-        <UserIdentStatus {...this.state} {...this.props} onChangeEmailVerifyEnabled={this.onChangeEmailVerifyEnabled.bind(this)} onChangeSmsVerifyEnabled={this.onChangeSmsVerifyEnabled.bind(this)} onChangeGoogleValidator={this.onChangeGoogleValidator.bind(this)} />
+        {/* 安全设置项 */}
+        <UserIdentStatus
+          {...this.state}
+          {...this.props}
+          onChangeEmailVerifyEnabled={this.onChangeEmailVerifyEnabled.bind(this)}
+          onChangeSmsVerifyEnabled={this.onChangeSmsVerifyEnabled.bind(this)}
+          onChangeGoogleValidator={this.onChangeGoogleValidator.bind(this)}
+          setVisible={this.setVisible.bind(this)}
+        />
+        {/* 设置昵称 */}
+        <Modal
+          title="设置昵称"
+          visible={visibleNickNameForm}
+          onCancel={() => this.props.setVisibleNickNameForm(false)}
+          footer={null}
+        >
+          <SetNickNameForm />
+        </Modal>
       </div>
     );
   }
 }
 
 const stateToProps = (state) => {
+  const { baseUserInfo, systemConfig, visibleNickNameForm } = state
   return {
-    userInfo: state.baseUserInfo,
-    systemConfig: state.systemConfig
+    baseUserInfo,
+    systemConfig,
+    visibleNickNameForm
   }
 }
 const dispatchToProps = (dispatch) => {
   return {
-    getBaseUserInfo() {
-      const action = getBaseUserInfoAction()
+    setVisibleNickNameForm(data) {
+      const action = setVisibleNickNameFormAction(data)
       dispatch(action)
     }
   }
 }
- 
-export default connect(stateToProps, null)(Security);
+
+export default connect(stateToProps, dispatchToProps)(Security);

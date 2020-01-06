@@ -24,6 +24,9 @@ export const SET_MOBILE_VCODE_SENDING = "setMobileVcodeSending"; // 设置短信
 export const SET_LOADING_MOBILE_VCODE_SEND = "setLoadingMobileVcodeSend"; // 设置请求短信接口是否成功
 export const RUN_MOBILE_VCODE_LEFT_TIME = "runMobileVcodeLeftTime" // 再次发送验证码倒计时
 
+// 设置昵称
+export const SET_VISIBLE_NICKNAME_FORM = "setVisibleNickNameForm"
+
 // SAGA
 export const SAGA_GET_BASE_USERINFO = "sagaGetBaseUserInfo";
 export const SAGA_GET_SYS_CONFIG = "sagaGetSysConfig";
