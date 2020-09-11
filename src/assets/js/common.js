@@ -1,4 +1,5 @@
-import { Icon } from "antd";
+import Icon from "@ant-design/icons";
+import { createFromIconfontCN } from "@ant-design/icons";
 function getTimestamp (msec) {
   msec = !msec && msec !== 0 ? msec : 1
   return parseInt((new Date()).valueOf() / msec, 10)
@@ -24,7 +25,7 @@ function loadScript (src, cb) {
   head.appendChild(script)
 }
 
-const IconFont = Icon.createFromIconfontCN({
+const IconFont = createFromIconfontCN({
   scriptUrl: '//at.alicdn.com/t/font_573845_wcz5xnzg5k.js',
 });
 

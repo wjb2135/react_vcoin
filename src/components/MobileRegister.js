@@ -129,5 +129,5 @@ function MobileRegister(props) {
   );
 }
 
-const UIMobileRegister = Form.create({ name: "normal_register" })(MobileRegister);
-export default withRouter(UIMobileRegister);
+// const UIMobileRegister = Form.create({ name: "normal_register" })(MobileRegister);
+export default withRouter(MobileRegister);

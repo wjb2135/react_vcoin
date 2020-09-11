@@ -40,58 +40,61 @@ class Login extends Component {
   }
   handleSubmit(form) {
     this.form = form;
-    form.validateFields((err, values) => {
-      if (!err) {
-        this.setState({
-          isLogining: true
-        });
-        this.postRequestParam("/api/login", values)
-          .then(res => {
-            if (res.errcode === 0) {
-              setCookie("_TOKEN", res.data._token);
-            }
-          })
-          .then(res => {
-            this.props.getBaseLoginUserInfo();
-          })
-          .catch(err => {
-            this.setState({
-              isLogining: false
-            });
-            if (err.errcode === 10010) {
-              // 表示需要短信、邮件或谷歌验证
-              this.setState({
-                verifyDialogVisible: true,
-                smsVerify: err.data.mobile,
-                emailVerify: err.data.email,
-                googleVerify: !!err.data.google_bind
-              });
-            } else if (err.errcode === 10013) {
-              // 无需二次认证
-              this.setState({
-                firstDialogVerifyVisible: true
-              });
-              switch (this.props.sysConfig.used_wy_verification) {
-                case "0":
-                  // 阿里云滑动验证
-                  this.child.init();
-                  break;
-                case "1":
-                  // 网易滑动拼图验证
-                  this.props.setVerifyType("mobile");
-                  this.props.setVisibleDialogVerify(true);
-                  break;
-
-                default:
-                  break;
-              }
-            } else {
-              // self.clearVcode()
-            }
-          });
-      } else {
-      }
+    console.log(form)
+    this.setState({
+      isLogining: true,
     });
+    this.postRequestParam("/api/login", form)
+      .then((res) => {
+        if (res.errcode === 0) {
+          this.setState({
+            isLogining: false,
+          });
+          setCookie("_TOKEN", res.data._token);
+          notification.success({
+            message: "登陆成功",
+          });
+          this.props.history.push("/");
+        }
+      })
+      .then((res) => {
+        this.props.getBaseLoginUserInfo();
+      })
+      .catch((err) => {
+        this.setState({
+          isLogining: false,
+        });
+        if (err.errcode === 10010) {
+          // 表示需要短信、邮件或谷歌验证
+          this.setState({
+            verifyDialogVisible: true,
+            smsVerify: err.data.mobile,
+            emailVerify: err.data.email,
+            googleVerify: !!err.data.google_bind,
+          });
+        } else if (err.errcode === 10013) {
+          // 无需二次认证
+          this.setState({
+            firstDialogVerifyVisible: true,
+          });
+          switch (this.props.sysConfig.used_wy_verification) {
+            case "0":
+              // 阿里云滑动验证
+              this.child.init();
+              break;
+            case "1":
+              // 网易滑动拼图验证
+              this.props.setVerifyType("mobile");
+              this.props.setVisibleDialogVerify(true);
+              break;
+
+            default:
+              break;
+          }
+        } else {
+          // self.clearVcode()
+        }
+      });
   }
   submitForm() {
     let self = this;
@@ -108,6 +111,7 @@ class Login extends Component {
         });
         this.postRequestParam("/api/login", values)
           .then(res => {
+			console.log(111)
             this.setState({
               isLogining: false
             });
@@ -119,6 +123,7 @@ class Login extends Component {
             }
           })
           .then(res => {
+			console.log(222)
             this.props.getBaseLoginUserInfo();
             this.props.history.push("/");
           })

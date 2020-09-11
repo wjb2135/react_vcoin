@@ -48,9 +48,7 @@ class mobileRegister extends Component {
               notification.success({
                 message: "注册成功"
               });
-              setTimeout(() => {
-                self.props.history.push("/");
-              }, 3000);
+              self.props.history.push("/");
             }
           })
           .catch(err => {
@@ -205,5 +203,5 @@ const dispatchToProps = (dispatch) => {
     }
   }
 }
-const WrappedRegisterForm = Form.create({ name: "normal_register" })(mobileRegister);
-export default connect(stateToProps, dispatchToProps)(WrappedRegisterForm);
+// const WrappedRegisterForm = Form.create({ name: "normal_register" })(mobileRegister);
+export default connect(stateToProps, dispatchToProps)(mobileRegister);

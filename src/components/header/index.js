@@ -1,6 +1,7 @@
 import React, { Component } from 'react'
 import { connect } from "react-redux";
-import { Menu, Dropdown, Popover, Icon } from "antd";
+import { Menu, Dropdown, Popover } from "antd";
+import Icon from "@ant-design/icons";
 import { withRouter, NavLink, Link } from "react-router-dom";
 import {
   sagaGetBaseUserInfoAction,

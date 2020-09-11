@@ -12,7 +12,7 @@ export default () => (
     <Route exact path="/" component={Home} />
     <Route exact path="/home" component={Home} />
     <Route path="/tctrade/trade/buy" component={TcTradeBuy} />
-    <Route path="/login" component={Login} />
+    <Route path="/logindd" component={Login} />
     <Route path="/register" component={Register} />
     <Route path="/demo/todoList" component={todoList} />
     <Route path="/demo/todoListNew" component={todoListNew} />

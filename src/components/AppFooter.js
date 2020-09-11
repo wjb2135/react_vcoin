@@ -1,5 +1,6 @@
 import React, { Component } from "react"
 import { connect } from "react-redux";
+import { Image } from "antd";
 import '@styles/AppFooter.less'
 
 class AppFooter extends Component {
@@ -57,13 +58,15 @@ class AppFooter extends Component {
           <a className="text" href={item.link} target="_blank" key={index} rel="noopener noreferrer">{item.name}</a>
         ))
       }
+      if (sysConfig.site_logo) {
+      }
     }
     return (
       <div id="footerContainer" className="footer-container">
         <div className="footer-main">
           <div className="footer-left">
             <div className="logo">
-              <img src={sysConfig.site_logo} alt="logo" style={{ maxWidth:150}} />
+              <Image width={140} src={sysConfig.site_logo} />
             </div>
             <div className="list">
               <div>

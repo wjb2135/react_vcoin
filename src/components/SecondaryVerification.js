@@ -271,5 +271,5 @@ class SecondaryVerification extends Component {
 //   }
 // }
 
-const WrappedForm = Form.create({ name:'secondary_verification' })(SecondaryVerification)
-export default connect(null, null)(WrappedForm)
+// const WrappedForm = Form.create({ name:'secondary_verification' })(SecondaryVerification)
+export default connect(null, null)(SecondaryVerification);

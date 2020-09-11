@@ -76,5 +76,5 @@ const dispatchToProps = (dispatch) => {
   }
 }
 
-const WrappedSetNickNameForm = Form.create({name: 'set_nickname'})(SetNickNameForm);
-export default connect(null, dispatchToProps)(WrappedSetNickNameForm);
+// const WrappedSetNickNameForm = Form.create({name: 'set_nickname'})(SetNickNameForm);
+export default connect(null, dispatchToProps)(SetNickNameForm);

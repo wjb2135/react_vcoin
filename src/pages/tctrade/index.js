@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
-import { Menu, Icon } from "antd";
+import { Menu } from "antd";
+import Icon from "@ant-design/icons";
 import { Switch, Route, Link, Redirect } from "react-router-dom";
 import $ from "jquery";
 import Routers from "@configs/routerMap__tctrade";
