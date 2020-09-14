@@ -162,9 +162,16 @@ class Forget extends Component {
           "support_memory_word",
           res.data.support_memory_word
         );
-        this.props.history.push(
-          `/forget/step_two?mobile=${mobile}&email=${email}&google=${google}&username=${username}&access_token=${res.data.access_token}`
-        );
+        this.props.history.push({
+          pathname: "/forget/step_two",
+          state: {
+            mobile,
+            email,
+            google,
+            username,
+            access_token: res.data.access_token,
+          },
+        });
       })
       .catch((err) => {
         this.loading = false;

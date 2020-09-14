@@ -13,7 +13,6 @@ import { Layout } from "antd";
 import Routers from "@configs/routerMap";
 import AppHeader from "@components/header";
 import AppFooter from "@components/AppFooter";
-import NotFound from "./components/notFound";
 
 import "./App.css";
 import "@styles/variable.less";

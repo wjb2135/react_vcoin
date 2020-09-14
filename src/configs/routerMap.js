@@ -6,6 +6,7 @@ import Register from "@pages/base/register"; // 登陆
 import TradeIndex from "@pages/tctrade"; // 交易
 import UserCenter from "@pages/uc"; // 交易
 import Forget from "@/pages/base/forget"; // 忘记密码
+import ForgetStepTwo from "@/pages/base/forget/step_two"; // 忘记密码第二步
 
 export default [
   { path: "/", name: "App", component: Home },
@@ -15,5 +16,6 @@ export default [
   { path: "/tctrade/", name: "TcTradeIndex", component: TradeIndex, isChild: true },
   { path: "/uc/", name: "UserCenter", component: UserCenter, isChild: true },
   { path: "/todolist", name: "todoList", component: todoList },
-  { path: "/forget", name: "Forget", component: Forget }
+  { path: "/forget", name: "Forget", component: Forget },
+  { path: "/forget/step_two", name: "ForgetStepTwo", component: ForgetStepTwo }
 ];
